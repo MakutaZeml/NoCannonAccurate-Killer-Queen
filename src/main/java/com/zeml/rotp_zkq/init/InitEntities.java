@@ -1,0 +1,14 @@
+package com.zeml.rotp_zkq.init;
+
+import com.zeml.rotp_zkq.RotpKillerQueen;
+
+import net.minecraft.entity.EntityType;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+
+public class InitEntities {
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, RotpKillerQueen.MOD_ID);
+    
+
+    
+}
