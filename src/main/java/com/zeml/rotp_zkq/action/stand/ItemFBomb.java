@@ -1,18 +1,16 @@
 package com.zeml.rotp_zkq.action.stand;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.github.standobyte.jojo.action.stand.StandEntityAction;
-import com.github.standobyte.jojo.entity.damaging.projectile.MRFireballEntity;
 import com.github.standobyte.jojo.entity.stand.StandEntity;
 import com.github.standobyte.jojo.entity.stand.StandEntityTask;
-import com.github.standobyte.jojo.init.ModSounds;
 import com.github.standobyte.jojo.power.impl.stand.IStandPower;
-import com.sun.media.jfxmedia.logging.Logger;
+
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 
 public class ItemFBomb extends StandEntityAction {
     public ItemFBomb(StandEntityAction.Builder builder) {
