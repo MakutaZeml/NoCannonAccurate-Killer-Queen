@@ -11,6 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
@@ -21,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -41,33 +43,30 @@ public class ItemFBombExplode extends StandEntityAction {
             List<ItemEntity> items = getItemsinRange(user,range);
             ArrayList<ItemEntity> bombs = new ArrayList<>();
             int id = user.getId();
+
             for (ItemEntity item:items){
-                ItemStack iteminfo = item.getItem();
-                int itemid = iteminfo.getOrCreateTag().getInt("user");
-                if (itemid ==id){
-                    bombs.add(item);
-                }               
+                if(item.getItem().hasTag()){
+                    ItemStack iteminfo = item.getItem();
+                    int itemid = iteminfo.getOrCreateTag().getInt("user");
+                    if (itemid ==id){
+                        bombs.add(item);
+                    }
+                }
+
             }
+
 
             List<PlayerEntity> players = getPlayersRange(user, range);
             List<LivingEntity> enties= getEntitiesRange(user, range);
 
 
             boolean gblok = JojoModConfig.getCommonConfigInstance(false).abilitiesBreakBlocks.get();
-            ExplodePlayers(players,gblok,id,user);
-            ExplodeEntity(enties,gblok,id,user);
-            if(gblok){
-                for (ItemEntity bomba:bombs) {
-                    bomba.level.explode(bomba,bomba.getX(),bomba.getY(), bomba.getZ(),2.0F, Explosion.Mode.BREAK);
-                    bomba.kill();
-                }
-            }
-            else{
-                for (ItemEntity bomba:bombs) {
-                    bomba.level.explode(bomba,bomba.getX(),bomba.getY(), bomba.getZ(),2.0F, Explosion.Mode.NONE);
-                    bomba.kill();
+            ExplodePlayers(players,id,user);
+            ExplodeEntity(enties,id,user);
+            for (ItemEntity bomba:bombs) {
+                bomba.level.explode(bomba,bomba.getX(),bomba.getY(), bomba.getZ(),2.0F, Explosion.Mode.NONE);
+                bomba.remove();
 
-                }
             }
 
         }
@@ -88,30 +87,23 @@ public class ItemFBombExplode extends StandEntityAction {
         return world.getEntitiesOfClass(LivingEntity.class,user.getBoundingBox().inflate(range),EntityPredicates.ENTITY_STILL_ALIVE).stream().collect(Collectors.toList());
     }
 
-    private static void ExplodePlayers(@Nullable List<PlayerEntity> list_player, boolean mode, int id, LivingEntity user){
+    private static void ExplodePlayers(@Nullable List<PlayerEntity> list_player, int id, LivingEntity user){
         for (PlayerEntity player: list_player){
             for(int i=0;i<player.inventory.getContainerSize();i++){
                 ItemStack p_item = player.inventory.getItem(i);
-                int id_it = p_item.getOrCreateTag().getInt("user");
                 if(!p_item.isEmpty() && p_item.hasTag()){
+                    int id_it = p_item.getOrCreateTag().getInt("user");
                     if(id_it==id){
-                        if(mode){
-                            player.level.explode(player,player.getX(),player.getY(),player.getZ(),2.0F, Explosion.Mode.BREAK);
-                            p_item.shrink(p_item.getCount());
-                            player.hurt(DamageSource.explosion(user),14);
-                        }else
-                        {
-                            player.level.explode(player,player.getX(),player.getY(),player.getZ(),2.0F, Explosion.Mode.NONE);
-                            p_item.shrink(p_item.getCount());
-                            player.hurt(DamageSource.explosion(user),14);
-                        }
+                        player.level.explode(player,player.getX(),player.getY(),player.getZ(),2.0F, Explosion.Mode.NONE);
+                        player.inventory.removeItem(p_item);
+                        player.hurt(DamageSource.explosion(user),14);
                     }
                 }
             }
         }
     }
 
-    private static void ExplodeEntity(@Nullable List<LivingEntity> entities,boolean mode, int id,LivingEntity user){
+    private static void ExplodeEntity(@Nullable List<LivingEntity> entities, int id,LivingEntity user){
         for (Entity entity:entities) {
             Entity type = entity.getEntity();
             if(!(type instanceof PlayerEntity)){
@@ -120,16 +112,9 @@ public class ItemFBombExplode extends StandEntityAction {
                     if(!item.isEmpty() && item.hasTag()){
                         int item_id =item.getOrCreateTag().getInt("user");
                         if (item_id==id){
-                            if (mode){
-                                entity.level.explode(entity,entity.getX(),entity.getY(),entity.getZ(),2.0F, Explosion.Mode.BREAK);
-                                item.shrink(item.getCount());
-                                entity.hurt(DamageSource.explosion(user),14);
-                            }else
-                            {
-                                entity.level.explode(entity,entity.getX(),entity.getY(),entity.getZ(),2.0F, Explosion.Mode.NONE);
-                                item.shrink(item.getCount());
-                                entity.hurt(DamageSource.explosion(user),14);
-                            }
+                            entity.level.explode(entity,entity.getX(),entity.getY(),entity.getZ(),2.0F, Explosion.Mode.NONE);
+                            item.shrink(item.getCount());
+                            entity.hurt(DamageSource.explosion(user),14);
                         }
                     }
                 }
