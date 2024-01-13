@@ -23,7 +23,7 @@ import javax.annotation.Nullable;
 public class EntityExplode extends StandEntityAction {
 
 
-    public EntityExplode(AbstractBuilder<?> builder) {
+    public EntityExplode(StandEntityAction.Builder builder) {
         super(builder);
     }
 
@@ -38,7 +38,7 @@ public class EntityExplode extends StandEntityAction {
                 double health = entity.getMaxHealth();
                 float ex_range = (float) (Math.log(health*s_power/2)/1.2);
                 float damage = (float) Math.sqrt(health*s_power);
-                entity.level.explode(entity,entity.getX(),entity.getY(),entity.getZ(),ex_range, Explosion.Mode.BREAK);
+                entity.level.explode(entity,entity.getX(),entity.getY(),entity.getZ(),ex_range, Explosion.Mode.NONE);
                 entity.hurt(DamageSource.explosion(user),damage);
                 entity.removeTag(String.valueOf(user.getId()));
             }

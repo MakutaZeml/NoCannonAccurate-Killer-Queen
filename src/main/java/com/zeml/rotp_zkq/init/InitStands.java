@@ -39,7 +39,7 @@ public class InitStands {
     
     public static final RegistryObject<StandEntityAction> KQ_BARRAGE = ACTIONS.register("kq_barrage", 
             () -> new StandEntityMeleeBarrage(new StandEntityMeleeBarrage.Builder()
-                    .barrageHitSound(InitSounds.KQ_BARRAGE)
+                    .barrageHitSound(InitSounds.KQ_PUNCH_LIGHT)
                     .standSound(InitSounds.KQ_ORA_ORA_ORA)));
     
     public static final RegistryObject<StandEntityHeavyAttack> KQ_COMBO_PUNCH = ACTIONS.register("kq_combo_punch", 
@@ -80,7 +80,7 @@ public class InitStands {
 
     public static final RegistryObject<StandEntityAction> KQ_SECOND_BOMB = ACTIONS.register("sheer_heart",
             ()->new SheerHeartAttack(new StandEntityAction.Builder().staminaCost(200)
-                    .resolveLevelToUnlock(3)
+                    .resolveLevelToUnlock(3).cooldown(200)
             ));
 
     public static final RegistryObject<StandEntityAction> KQ_SB_BACK = ACTIONS.register("shear_heart_back",

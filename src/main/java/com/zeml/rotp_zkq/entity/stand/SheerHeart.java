@@ -24,6 +24,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.scoreboard.Team;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -72,7 +73,7 @@ public class SheerHeart extends MonsterEntity {
     }
 
     public static AttributeModifierMap.MutableAttribute createAttributes() {
-        return MonsterEntity.createMonsterAttributes()
+        return MonsterEntity.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D);
     }
@@ -89,6 +90,7 @@ public class SheerHeart extends MonsterEntity {
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new MasterHurtByTargetGoal(this));
         this.targetSelector.addGoal(2,new MasterHurtTargetGoal(this));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 
     }
 
@@ -165,11 +167,7 @@ public class SheerHeart extends MonsterEntity {
                 this.explodeCreeper();
             }
         }
-
-
         super.tick();
-
-
     }
 
     @Override
@@ -223,6 +221,11 @@ public class SheerHeart extends MonsterEntity {
     @Override
     protected void populateDefaultEquipmentSlots(DifficultyInstance difficulty) {}
 
+    @Override
+    public boolean isInvulnerableTo(DamageSource source){
+        return true;
+
+    }
 
 
     @Override
@@ -293,4 +296,7 @@ public class SheerHeart extends MonsterEntity {
     }
 
 
+    public void die() {
+        this.remove();
+    }
 }

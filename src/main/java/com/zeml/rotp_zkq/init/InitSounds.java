@@ -15,17 +15,24 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class InitSounds {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, RotpKillerQueen.MOD_ID);
 
-    public static final Supplier<SoundEvent> KQ_SUMMON = ModSounds.STAND_SUMMON_DEFAULT;
     
     public static final Supplier<SoundEvent> KQ_UNSUMMON = ModSounds.STAND_UNSUMMON_DEFAULT;
-    
-    public static final Supplier<SoundEvent> KQ_PUNCH_LIGHT = ModSounds.STAND_PUNCH_LIGHT;
-    
-    public static final Supplier<SoundEvent> KQ_PUNCH_HEAVY = ModSounds.STAND_PUNCH_HEAVY;
-    
-    public static final Supplier<SoundEvent> KQ_BARRAGE = ModSounds.STAND_PUNCH_LIGHT;
 
 
+
+
+
+    public static final Supplier<SoundEvent> KQ_SUMMON = SOUNDS.register("killer_queen_summon",
+            ()->new SoundEvent(new ResourceLocation(RotpKillerQueen.MOD_ID,"killer_queen_summon"))
+    );
+
+
+    public static final Supplier<SoundEvent> KQ_PUNCH_LIGHT = SOUNDS.register("killer_queen_punch",
+            ()->new SoundEvent(new ResourceLocation(RotpKillerQueen.MOD_ID,"killer_queen_punch")));
+
+    public static final Supplier<SoundEvent> KQ_PUNCH_HEAVY = SOUNDS.register("killer_queen_punch_heavy",
+            ()->new SoundEvent(new ResourceLocation(RotpKillerQueen.MOD_ID,"killer_queen_punch_heavy")
+    ));
     
     public static final RegistryObject<SoundEvent> KQ_ORA = SOUNDS.register("killer_queen_shiba",
             () -> new SoundEvent(new ResourceLocation(RotpKillerQueen.MOD_ID, "killer_queen_shiba")));

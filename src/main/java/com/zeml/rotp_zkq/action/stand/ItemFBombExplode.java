@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 
 public class ItemFBombExplode extends StandEntityAction {
     public  static final StandPose BOMB = new StandPose("BOMB");
-    public ItemFBombExplode(AbstractBuilder<?> builder) {
+    public ItemFBombExplode(StandEntityAction.Builder builder) {
         super(builder);
     }
     

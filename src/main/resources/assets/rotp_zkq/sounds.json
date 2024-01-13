@@ -30,6 +30,22 @@
   "sheer_heart_step":{
     "subtitle": "rotp_zkq.subtitle.sheer_heart_step",
     "sounds": ["rotp_zkq:stand/sheer_heart_step","rotp_zkq:stand/sheer_heart_step_2"]
+  },
+  "killer_queen_punch":{
+    "subtitle": "rotp_zkq.subtitle.killer_queen_punch",
+    "sounds":["rotp_zkq:stand/killer_queen_punch"]
+  },
+  "killer_queen_barrage":{
+    "subtitle": "rotp_zkq.subtitle.killer_queen_punch",
+    "sounds":["rotp_zkq:stand/killer_queen_punch"]
+  },
+  "killer_queen_punch_heavy":{
+    "subtitle": "rotp_zkq.subtitle.killer_queen_punch_heavy",
+    "sounds":["rotp_zkq:stand/killer_queen_punch_heavy"]
+  },
+  "killer_queen_summon":{
+    "subtitle": "rotp_zkq.subtitle.killer_queen_summon",
+    "sounds":["rotp_zkq:stand/killer_queen_summon","rotp_zkq:stand/killer_queen_summon_2","rotp_zkq:stand/killer_queen_summon_3","rotp_zkq:stand/killer_queen_summon_4","rotp_zkq:stand/killer_queen_summon_5","rotp_zkq:stand/killer_queen_summon_6"]
   }
 
 }

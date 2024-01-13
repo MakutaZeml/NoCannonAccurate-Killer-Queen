@@ -15,6 +15,8 @@
   "action.rotp_zkq.kq_snow_bomb": "Stray Snow",
   "action.rotp_zkq.sheer_heart": "Sheer Heart Attack",
   "action.rotp_zkq.shear_heart_back":"Pick Up Sheer Heart Attack",
+  "action.rotp_zkq.kq_combo_punch":"Combo Punch",
+
 
   "rotp_zkq.subtitle.kq_name": "\"Killer Queen\"",
   "rotp_zkq.subtitle.shiba": "Shiba",
@@ -23,5 +25,8 @@
   "rotp_zkq.subtitle.boom": "Killer Queen bomb",
   "rotp_zkq.subtitle.kira_sheer_heart": "\"Sheer Heart Attack\"",
   "rotp_zkq.subtitle.sheer_heart": "Sheer Heart Attack",
-  "rotp_zkq.subtitle.sheer_heart_step": "Sheer Heart Attack step "
+  "rotp_zkq.subtitle.sheer_heart_step": "Sheer Heart Attack step ",
+  "rotp_zkq.subtitle.killer_queen_summon": "Killer Queen Summoned",
+  "rotp_zkq.subtitle.killer_queen_punch": "Punch Sound",
+  "rotp_zkq.subtitle.killer_queen_punch_heavy": "Punch Sound"
 }
