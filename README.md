@@ -1,2 +1,2 @@
-# ![Tutorial Stand](https://cdn.discordapp.com/attachments/1008097733732745248/1145366100624814101/Tutorial_Stand.png) Tutorial Stand (Ripples of the Past addon)
+# ![No Canon Accurate Killer Queen Stand](https://cdn.discordapp.com/attachments/978090476404113429/1208600417257390150/killer_queen.png?ex=65e3dfda&is=65d16ada&hm=ba9d8beeb675743ceb3855c1c84fa8d5cf0dd9b413b008d2c58679632348f854&) Killer Queen Stand (Ripples of the Past addon)
 An addon mod for [Ripples of the Past](https://github.com/StandoByte/Ripples-of-the-Past), a mod for Minecraft based on JoJo's Bizarre Adventure.
