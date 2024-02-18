@@ -25,7 +25,7 @@ public class EntityBomb extends StandEntityAction {
     public void standPerform(@NotNull World world, StandEntity standEntity, IStandPower userPower, StandEntityTask task){
        if(!world.isClientSide){
            LivingEntity user = userPower.getUser();
-           String s_id = String.valueOf(user.getId());
+           String s_id = String.valueOf(user.getUUID());
            double range = standEntity.getMaxRange();
 
 
