@@ -19,9 +19,6 @@ public class InitSounds {
     public static final Supplier<SoundEvent> KQ_UNSUMMON = ModSounds.STAND_UNSUMMON_DEFAULT;
 
 
-
-
-
     public static final Supplier<SoundEvent> KQ_SUMMON = SOUNDS.register("killer_queen_summon",
             ()->new SoundEvent(new ResourceLocation(RotpKillerQueen.MOD_ID,"killer_queen_summon"))
     );

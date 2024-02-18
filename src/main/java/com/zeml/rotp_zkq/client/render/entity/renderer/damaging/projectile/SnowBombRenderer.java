@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;
 
-public class SnowBombRenderer extends SimpleEntityRenderer<SnowBombEntity, SnowBombModel> {
+    public class SnowBombRenderer extends SimpleEntityRenderer<SnowBombEntity, SnowBombModel> {
 
     public SnowBombRenderer(EntityRendererManager rendererManager){
         super(rendererManager,new SnowBombModel(), new ResourceLocation(RotpKillerQueen.MOD_ID,"textures/entity/projectiles/snow_bomb.png"));

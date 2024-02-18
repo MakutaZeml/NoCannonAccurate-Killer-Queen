@@ -1,5 +1,6 @@
 package com.zeml.rotp_zkq.entity.damaging.projectile;
 
+import com.github.standobyte.jojo.JojoModConfig;
 import com.github.standobyte.jojo.action.ActionTarget;
 import com.github.standobyte.jojo.entity.damaging.projectile.ModdedProjectileEntity;
 import com.github.standobyte.jojo.power.impl.stand.IStandPower;
@@ -50,8 +51,10 @@ public class SnowBombEntity extends ModdedProjectileEntity {
 
     @Override
     protected boolean hurtTarget(Entity target, LivingEntity owner){
+        double mul = JojoModConfig.getCommonConfigInstance(false).standDamageMultiplier.get();
+
         level.explode(target, target.getX(),target.getY(),target.getZ(),1, Explosion.Mode.NONE);
-        return target.hurt(DamageSource.explosion(owner),14);
+        return target.hurt(DamageSource.explosion(owner),14* (float)mul);
     }
 
 

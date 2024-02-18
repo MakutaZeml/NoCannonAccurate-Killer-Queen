@@ -43,7 +43,7 @@ public class InitStands {
                     .standSound(InitSounds.KQ_ORA_ORA_ORA)));
     
     public static final RegistryObject<StandEntityHeavyAttack> KQ_COMBO_PUNCH = ACTIONS.register("kq_combo_punch", 
-            () -> new StandEntityHeavyAttack(new StandEntityHeavyAttack.Builder()
+            () -> new KQFinisher(new StandEntityHeavyAttack.Builder()
                     .punchSound(InitSounds.KQ_PUNCH_HEAVY)
                     .standSound(Phase.WINDUP, InitSounds.KQ_ORA_LONG)
                     .partsRequired(StandPart.ARMS)));
@@ -69,12 +69,12 @@ public class InitStands {
             ));
 
     public static final RegistryObject<StandEntityAction> KQ_ITEM_BOMB_EX = ACTIONS.register("kq_item_explo",
-            ()->new ItemFBombExplode(new StandEntityAction.Builder()
+            ()->new ItemFBombExplode(new StandEntityAction.Builder().standPerformDuration(10).standRecoveryTicks(5)
                     .shiftVariationOf(KQ_ITEM_BOMB).staminaCost(20).standSound(InitSounds.KQ_BOMB)));
 
 
     public static final RegistryObject<StandEntityAction> KQ_ENTITY_EX = ACTIONS.register("kq_entity_explo",
-            ()->new EntityExplode(new StandEntityAction.Builder()
+            ()->new EntityExplode(new StandEntityAction.Builder().standPerformDuration(10).standRecoveryTicks(5)
                     .shiftVariationOf(KQ_ENTITY_BOMB).staminaCost(250F)
                     .standSound(InitSounds.KQ_BOMB)));
 
