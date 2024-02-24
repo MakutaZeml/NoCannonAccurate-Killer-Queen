@@ -1,7 +1,8 @@
 package com.zeml.rotp_zkq;
 
 import com.zeml.rotp_zkq.init.*;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import com.zeml.rotp_zkq.network.AddonPackets;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,6 +25,8 @@ public class RotpKillerQueen {
         InitStands.STANDS.register(modEventBus);
 
         ModEntityTypes.ENTITIES.register(modEventBus);
+        
+        AddonPackets.init();
     }
 
 

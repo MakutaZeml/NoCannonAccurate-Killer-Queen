@@ -1,17 +1,22 @@
 package com.zeml.rotp_zkq.action.stand;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.github.standobyte.jojo.action.stand.StandEntityAction;
 import com.github.standobyte.jojo.entity.stand.StandEntity;
 import com.github.standobyte.jojo.entity.stand.StandEntityTask;
 import com.github.standobyte.jojo.power.impl.stand.IStandPower;
 import com.github.standobyte.jojo.util.mod.JojoModUtil;
 import com.zeml.rotp_zkq.init.InitSounds;
+import com.zeml.rotp_zkq.network.AddonPackets;
+import com.zeml.rotp_zkq.network.server.AddTagPacket;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 
 
 
@@ -42,6 +47,9 @@ public class EntityBomb extends StandEntityAction {
                    standEntity.playSound(InitSounds.USER_KQ.get(), 1,1);
                    standEntity.moveTo(target.position());
                    target.addTag(s_id);
+                   if (user instanceof ServerPlayerEntity) {
+                       AddonPackets.sendToClient(new AddTagPacket(target.getId(), s_id), (ServerPlayerEntity) user);
+                   }
                }
            }
        }
