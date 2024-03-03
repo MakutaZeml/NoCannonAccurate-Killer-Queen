@@ -1,7 +1,9 @@
 package com.zeml.rotp_zkq.init;
 
+import com.github.standobyte.jojo.entity.stand.StandPose;
 import com.zeml.rotp_zkq.RotpKillerQueen;
 import com.zeml.rotp_zkq.action.stand.*;
+import com.zeml.rotp_zkq.client.render.entity.model.stand.KillerQueenModel;
 import com.zeml.rotp_zkq.entity.stand.stands.KQStandEntity;
 import com.github.standobyte.jojo.action.Action;
 import com.github.standobyte.jojo.action.stand.StandAction;
@@ -65,18 +67,25 @@ public class InitStands {
                     .partsRequired(StandPart.ARMS).cooldown(5)));
 
     public static final RegistryObject<StandEntityAction> KQ_ENTITY_BOMB = ACTIONS.register("kq_entitybomb",
-            ()->new EntityBomb(new StandEntityAction.Builder().resolveLevelToUnlock(2)
+            ()->new EntityBomb(new StandEntityAction.Builder().resolveLevelToUnlock(2).standWindupDuration(10)
+                    .standPose(StandPose.SUMMON).standPerformDuration(10).standPose(StandPose.RANGED_ATTACK)
             ));
 
     public static final RegistryObject<StandEntityAction> KQ_ITEM_BOMB_EX = ACTIONS.register("kq_item_explo",
-            ()->new ItemFBombExplode(new StandEntityAction.Builder().standPerformDuration(10).standRecoveryTicks(5)
-                    .shiftVariationOf(KQ_ITEM_BOMB).staminaCost(20).standSound(InitSounds.KQ_BOMB)));
+            ()->new ItemFBombExplode(new StandEntityAction.Builder().standPerformDuration(5)
+                    .shiftVariationOf(KQ_ITEM_BOMB).staminaCost(20).standSound(InitSounds.KQ_BOMB).standPose(StandPose.RANGED_ATTACK)
+            ));
 
 
     public static final RegistryObject<StandEntityAction> KQ_ENTITY_EX = ACTIONS.register("kq_entity_explo",
-            ()->new EntityExplode(new StandEntityAction.Builder().standPerformDuration(10).standRecoveryTicks(5)
-                    .shiftVariationOf(KQ_ENTITY_BOMB).staminaCost(250F)
+            ()->new EntityExplode(new StandEntityAction.Builder().standWindupDuration(5)
+                    .staminaCost(250F).standPose(StandPose.RANGED_ATTACK)
                     .standSound(InitSounds.KQ_BOMB)));
+
+    public static final RegistryObject<StandEntityAction> KQ_ENTITY_QUIT = ACTIONS.register("kq_entity_quit",
+            ()->new EntityQuitBomb(new StandEntityAction.Builder().standWindupDuration(5)
+                    .staminaCost(250F).standPose(StandPose.RANGED_ATTACK).shiftVariationOf(KQ_ENTITY_EX)
+                    .standSound(InitSounds.KQ_UNSUMMON)));
 
     public static final RegistryObject<StandEntityAction> KQ_SECOND_BOMB = ACTIONS.register("sheer_heart",
             ()->new SheerHeartAttack(new StandEntityAction.Builder().staminaCost(200)
@@ -101,14 +110,14 @@ public class InitStands {
                             new StandAction[] {
                                     KQ_PUNCH.get(), 
                                     KQ_BARRAGE.get(),
-                                    KQ_SECOND_BOMB.get(),
                                     KQ_SNOW_BOMB.get()
 
                             },
                             new StandAction[] {
                                     KQ_BLOCK.get(),
                                     KQ_ENTITY_BOMB.get(),
-                                    KQ_ITEM_BOMB.get()
+                                    KQ_ITEM_BOMB.get(),
+                                    KQ_SECOND_BOMB.get(),
 
 
                             },
