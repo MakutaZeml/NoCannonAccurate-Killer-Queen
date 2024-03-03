@@ -35,8 +35,18 @@ public class EntityExplode extends StandEntityAction {
                 double health = entity.getMaxHealth();
                 float ex_range = (float) (Math.log(health*s_power/2)/1.2);
                 float damage = (float) Math.sqrt(health*s_power);
-                entity.level.explode(entity,entity.getX(),entity.getY(),entity.getZ(),ex_range, Explosion.Mode.NONE);
-                entity.hurt(DamageSource.explosion(user),damage);
+
+                if(entity instanceof StandEntity){
+                    StandEntity stand = (StandEntity)  entity;
+                    LivingEntity use = stand.getUser();
+                    entity.level.explode(user,use.getX(),use.getY(),use.getZ(),ex_range, Explosion.Mode.NONE);
+                    user.hurt(DamageSource.explosion(user),damage);
+                }
+                else {
+                    entity.level.explode(user,entity.getX(),entity.getY(),entity.getZ(),ex_range, Explosion.Mode.NONE);
+                    entity.hurt(DamageSource.explosion(user),damage);
+
+                }
                 String s_id = String.valueOf(user.getUUID());
                 entity.removeTag(s_id);
                 if (user instanceof ServerPlayerEntity) {
