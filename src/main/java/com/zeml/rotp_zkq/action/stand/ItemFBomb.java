@@ -1,5 +1,7 @@
 package com.zeml.rotp_zkq.action.stand;
 
+import com.github.standobyte.jojo.action.ActionConditionResult;
+import com.github.standobyte.jojo.action.ActionTarget;
 import org.jetbrains.annotations.NotNull;
 
 import com.github.standobyte.jojo.action.stand.StandEntityAction;

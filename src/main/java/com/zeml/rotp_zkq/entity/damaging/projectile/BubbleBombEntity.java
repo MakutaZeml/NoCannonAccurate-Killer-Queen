@@ -15,18 +15,18 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class SnowBombEntity extends ModdedProjectileEntity {
-
+public class BubbleBombEntity extends ModdedProjectileEntity {
     @Nullable
     private IStandPower userStandPower;
-
-    public SnowBombEntity(LivingEntity shooter, World world, @Nullable IStandPower standPower){
-        super(ModEntityTypes.SNOW_BOMB.get(), shooter,world);
+    public BubbleBombEntity(LivingEntity shooter, World world, @Nullable IStandPower standPower){
+        super(ModEntityTypes.BUBBLE_BOMB.get(), shooter,world);
         userStandPower =standPower;
     }
-    public SnowBombEntity(EntityType<? extends SnowBombEntity> type, World world){
+    public BubbleBombEntity(EntityType<? extends BubbleBombEntity> type, World world){
         super(type, world);
     }
+
+
 
 
     @Override
@@ -53,7 +53,7 @@ public class SnowBombEntity extends ModdedProjectileEntity {
     protected boolean hurtTarget(Entity target, LivingEntity owner){
         double mul = JojoModConfig.getCommonConfigInstance(false).standDamageMultiplier.get();
 
-        level.explode(target, target.getX(),target.getY(),target.getZ(),1, Explosion.Mode.NONE);
+        level.explode(this, target.getX(),target.getY(),target.getZ(),1, Explosion.Mode.NONE);
         return target.hurt(DamageSource.explosion(owner),14* (float)mul);
     }
 

@@ -1,6 +1,8 @@
 {
   "entity.rotp_zkq.killer_queen": "Killer Queen",
   "entity.rotp_zkq.sheer_heart": "Sheer Heart Attack",
+  "entity.rotp_zkq.snow_bomb": "Snow Bomb",
+  "entity.rotp_zkq.bubble_bomb": "Bubble Bomb",
 
   "stand.rotp_zkq.killer_queen": "Killer Queen",
 
@@ -12,10 +14,13 @@
   "action.rotp_zkq.kq_item_explo": "Item Explosion",
   "action.rotp_zkq.kq_entitybomb": "First Bomb: Entity",
   "action.rotp_zkq.kq_entity_explo": "Entity Explosion",
+  "action.rotp_zkq.kq_entity_quit": "Entity quit bomb",
   "action.rotp_zkq.kq_snow_bomb": "Stray Snow",
+  "action.rotp_zkq.kq_bubble_bomb": "Bubble Bomb",
   "action.rotp_zkq.sheer_heart": "Sheer Heart Attack",
   "action.rotp_zkq.shear_heart_back":"Pick Up Sheer Heart Attack",
   "action.rotp_zkq.kq_combo_punch":"Bombastic Finisher",
+  "action.rotp_zkq.snow_explode": "Projectile explode",
 
 
   "rotp_zkq.subtitle.kq_name": "\"Killer Queen\"",

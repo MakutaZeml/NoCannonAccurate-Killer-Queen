@@ -1,6 +1,7 @@
 package com.zeml.rotp_zkq.client.ui.marker;
 
 import com.github.standobyte.jojo.client.ui.marker.MarkerRenderer;
+import com.github.standobyte.jojo.entity.stand.StandEntity;
 import com.github.standobyte.jojo.power.impl.stand.IStandPower;
 import com.zeml.rotp_zkq.RotpKillerQueen;
 import net.minecraft.client.Minecraft;
@@ -52,5 +53,7 @@ public class EntityBombMarker extends MarkerRenderer {
                 EntityPredicates.ENTITY_STILL_ALIVE).stream().filter(entity -> entity.getTags().contains(s_id));
         return entidades;
     }
+
+
 
 }

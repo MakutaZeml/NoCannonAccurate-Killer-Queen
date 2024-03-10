@@ -3,6 +3,8 @@ package com.zeml.rotp_zkq.action.stand;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.github.standobyte.jojo.action.ActionConditionResult;
+import com.github.standobyte.jojo.action.ActionTarget;
 import org.jetbrains.annotations.NotNull;
 
 import com.github.standobyte.jojo.action.stand.StandEntityAction;
@@ -19,7 +21,24 @@ import net.minecraft.world.World;
 public class SheerHeartAttack extends StandEntityAction {
     public SheerHeartAttack(StandEntityAction.Builder builder) {
         super(builder);
+    }
 
+
+    @Override
+    protected ActionConditionResult checkSpecificConditions(LivingEntity user, IStandPower power, ActionTarget target){
+        List<SheerHeart> ListSH =isSHpresent(power);
+        String s_id = String.valueOf(user.getUUID());
+        boolean able = true;
+        for(SheerHeart sheerHeart:ListSH){
+            if (sheerHeart.getOwner()==user){
+                able=false;
+            }
+        }
+        if(able){
+            return ActionConditionResult.POSITIVE;
+        }else {
+            return  ActionConditionResult.NEGATIVE;
+        }
     }
 
     @Override

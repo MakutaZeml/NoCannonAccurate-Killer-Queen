@@ -60,7 +60,6 @@ public class ItemFBombExplode extends StandEntityAction {
             List<LivingEntity> enties= getEntitiesRange(user, range);
 
 
-            boolean gblok = JojoModConfig.getCommonConfigInstance(false).abilitiesBreakBlocks.get();
             ExplodePlayers(players,id,user);
             ExplodeEntity(enties,id,user);
             for (ItemEntity bomba:bombs) {

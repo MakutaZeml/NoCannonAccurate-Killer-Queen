@@ -18,8 +18,8 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 // Exported for Minecraft version 1.15 - 1.16 with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
-
 public class KillerQueenModel extends HumanoidStandModel<KQStandEntity> {
+
 	private final ModelRenderer belt;
 
 	public KillerQueenModel() {
@@ -130,11 +130,15 @@ public class KillerQueenModel extends HumanoidStandModel<KQStandEntity> {
 
 		actionAnim.put(StandPose.RANGED_ATTACK, new PosedActionAnimation.Builder<KQStandEntity>()
 				.addPose(StandEntityAction.Phase.BUTTON_HOLD, new ModelPose<>(new RotationAngle[] {
-						new RotationAngle(body, 0.0F, -0.48F, 0.0F),
-						new RotationAngle(leftArm, 0.0F, 0.0F, 0.0F),
-						new RotationAngle(leftForeArm, 0.0F, 0.0F, 0.0F),
-						new RotationAngle(rightArm, -1.0908F, 0.0F, 1.5708F),
-						new RotationAngle(rightForeArm, 0.0F, 0.0F, 0.0F)
+						RotationAngle.fromDegrees(body,15f, 0f, 0f),
+						RotationAngle.fromDegrees(leftArm,24.81f, 3.16f, -24.3f),
+						RotationAngle.fromDegrees(leftForeArm,-35f, 0f, 0f),
+						RotationAngle.fromDegrees(rightArm,-67.5f, 0f, 0f),
+						RotationAngle.fromDegrees(rightForeArm,0f, 0f, -62.5f),
+						RotationAngle.fromDegrees(leftLeg,-47.39f, -3.68f, -28.38f),
+						RotationAngle.fromDegrees(leftLowerLeg,57.5f, 0f, 0f),
+						RotationAngle.fromDegrees(rightLeg,-31.61f, 7.99f, 25.23f),
+						RotationAngle.fromDegrees(rightLowerLeg,45.99f, 1.89f, -7.6f)
 				}))
 				.build(idlePose));
 

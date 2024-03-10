@@ -72,7 +72,7 @@ public class InitStands {
             ));
 
     public static final RegistryObject<StandEntityAction> KQ_ITEM_BOMB_EX = ACTIONS.register("kq_item_explo",
-            ()->new ItemFBombExplode(new StandEntityAction.Builder().standPerformDuration(5)
+            ()->new ItemFBombExplode(new StandEntityAction.Builder().standPerformDuration(5).standPerformDuration(20)
                     .shiftVariationOf(KQ_ITEM_BOMB).staminaCost(20).standSound(InitSounds.KQ_BOMB).standPose(StandPose.RANGED_ATTACK)
             ));
 
@@ -96,10 +96,17 @@ public class InitStands {
             ()->new SHABack(new StandEntityAction.Builder().shiftVariationOf(KQ_SECOND_BOMB)));
 
     public static final RegistryObject<StandEntityAction> KQ_SNOW_BOMB = ACTIONS.register("kq_snow_bomb",
-            ()->new SnowBomb(new StandEntityAction.Builder().staminaCost(100).resolveLevelToUnlock(4).cooldown(25)
+            ()->new SnowBomb(new StandEntityAction.Builder().staminaCost(100).resolveLevelToUnlock(4).cooldown(25).partsRequired(StandPart.ARMS)
                     ));
 
+    public static final RegistryObject<StandEntityAction> KQ_BUBBLE_BOMB = ACTIONS.register("kq_bubble_bomb",
+            ()->new HBubbleBomb(new StandEntityAction.Builder().staminaCost(100).cooldown(25).partsRequired(StandPart.ARMS)
+            ));
 
+    public static final RegistryObject<StandEntityAction> KQ_SNOW_EXPLODE = ACTIONS.register("snow_explode",
+            ()-> new ExplodeSnow(new StandEntityAction.Builder().staminaCost(100).shiftVariationOf(KQ_SNOW_BOMB)
+                    .standSound(InitSounds.KQ_BOMB).standPose(StandPose.RANGED_ATTACK).shiftVariationOf(KQ_BUBBLE_BOMB)
+                    .standPerformDuration(20))) ;
 
     public static final EntityStandRegistryObject<EntityStandType<StandStats>, StandEntityType<KQStandEntity>> KQ_STAND =
             new EntityStandRegistryObject<>("killer_queen",
@@ -110,15 +117,13 @@ public class InitStands {
                             new StandAction[] {
                                     KQ_PUNCH.get(), 
                                     KQ_BARRAGE.get(),
-                                    KQ_SNOW_BOMB.get()
-
+                                    KQ_SNOW_BOMB.get(),
                             },
                             new StandAction[] {
                                     KQ_BLOCK.get(),
                                     KQ_ENTITY_BOMB.get(),
                                     KQ_ITEM_BOMB.get(),
                                     KQ_SECOND_BOMB.get(),
-
 
                             },
 
