@@ -4,6 +4,7 @@ import com.github.standobyte.jojo.client.ClientUtil;
 import com.github.standobyte.jojo.client.ui.marker.MarkerRenderer;
 import com.zeml.rotp_zkq.RotpKillerQueen;
 import com.zeml.rotp_zkq.client.render.entity.renderer.auxiliarstand.SheerHeartRenderer;
+import com.zeml.rotp_zkq.client.render.entity.renderer.damaging.projectile.BubbleBombRenderer;
 import com.zeml.rotp_zkq.client.render.entity.renderer.damaging.projectile.SnowBombRenderer;
 import com.zeml.rotp_zkq.client.render.entity.renderer.stand.KillerQueenRenderer;
 import com.zeml.rotp_zkq.client.ui.marker.EntityBombMarker;
@@ -31,7 +32,9 @@ public class ClientInit {
 
         RenderingRegistry.registerEntityRenderingHandler(AddonStands.KQ_STAND.getEntityType(), KillerQueenRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SNOW_BOMB.get(), SnowBombRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BUBBLE_BOMB.get(), BubbleBombRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SHEAR_HEART.get(), SheerHeartRenderer::new);
+
 
         MarkerRenderer.Handler.addRenderer(new EntityBombMarker(mc));
     }

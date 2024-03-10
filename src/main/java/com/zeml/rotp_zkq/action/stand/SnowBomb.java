@@ -1,25 +1,30 @@
 package com.zeml.rotp_zkq.action.stand;
 
+import com.github.standobyte.jojo.action.Action;
 import com.github.standobyte.jojo.action.ActionConditionResult;
 import com.github.standobyte.jojo.action.ActionTarget;
+import com.github.standobyte.jojo.action.stand.StandAction;
 import com.github.standobyte.jojo.action.stand.StandEntityAction;
 import com.github.standobyte.jojo.entity.stand.StandEntity;
 import com.github.standobyte.jojo.entity.stand.StandEntityTask;
+import com.github.standobyte.jojo.init.power.non_stand.ModPowers;
+import com.github.standobyte.jojo.init.power.non_stand.hamon.ModHamonSkills;
 import com.github.standobyte.jojo.power.impl.nonstand.INonStandPower;
+import com.github.standobyte.jojo.power.impl.nonstand.type.hamon.HamonData;
 import com.github.standobyte.jojo.power.impl.stand.IStandPower;
-import com.github.standobyte.jojo.util.general.GeneralUtil;
 import com.zeml.rotp_zkq.entity.damaging.projectile.SnowBombEntity;
+import com.zeml.rotp_zkq.init.InitStands;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class SnowBomb extends StandEntityAction {
     INonStandPower pow;
@@ -27,6 +32,49 @@ public class SnowBomb extends StandEntityAction {
         super(builder);
     }
 
+
+    @Override
+    protected Action<IStandPower> replaceAction(IStandPower power, ActionTarget target) {
+        AtomicBoolean change = new AtomicBoolean(false);
+        INonStandPower.getNonStandPowerOptional(power.getUser()).ifPresent(ipower->{
+            Optional<HamonData> hamonOp = ipower.getTypeSpecificData(ModPowers.HAMON.get());
+            if(hamonOp.isPresent()){
+                HamonData hamon = hamonOp.get();
+                if(hamon.isSkillLearned(ModHamonSkills.BUBBLE_LAUNCHER.get())){
+                    change.set(true);
+                }
+            }
+        }
+        );
+        if(change.get()){
+            return InitStands.KQ_BUBBLE_BOMB.get();
+        }
+        return super.replaceAction(power, target);
+    }
+
+
+    @Override
+    protected ActionConditionResult checkSpecificConditions(LivingEntity user, IStandPower power, ActionTarget target){
+        if (user instanceof PlayerEntity){
+            PlayerEntity player = (PlayerEntity) user;
+            ItemStack stack = GetSnowItemsP(player);
+            Item type = stack.getItem();
+            if (type == Items.SNOWBALL){
+                return ActionConditionResult.POSITIVE;
+            }else {
+                return ActionConditionResult.NEGATIVE;
+            }
+
+        }else {
+            ItemStack stack = GetSnowItem(user);
+            Item type = stack.getItem();
+            if (type == Items.SNOWBALL){
+                return ActionConditionResult.POSITIVE;
+            }else {
+                return ActionConditionResult.NEGATIVE;
+            }
+        }
+    }
 
     @Override
     public void standPerform(@NotNull World world, StandEntity standEntity, IStandPower userPower, StandEntityTask task){
@@ -38,10 +86,7 @@ public class SnowBomb extends StandEntityAction {
                 Item type = itemStack.getItem();
                 if(type == Items.SNOWBALL){
                     SnowBombEntity snowBomb = new SnowBombEntity(player, world,  userPower);
-                    snowBomb.setShootingPosOf(player);
-                    snowBomb.shootFromRotation(player, 2.0F,standEntity.getProjectileInaccuracy(1.0F));
-                    standEntity.addProjectile(snowBomb);
-                    itemStack.shrink(1);
+                    standEntity.shootProjectile(snowBomb,0.5F,1F);
                     standEntity.playSound(SoundEvents.SNOWBALL_THROW,1.0F,1.0F);
                 }
 
@@ -50,9 +95,7 @@ public class SnowBomb extends StandEntityAction {
             {
                 ItemStack itemStack = GetSnowItem(user);
                 SnowBombEntity snowBomb = new SnowBombEntity(user, world,  userPower);
-                snowBomb.setShootingPosOf(user);
-                snowBomb.shootFromRotation(user, 2.0F,standEntity.getProjectileInaccuracy(1.0F));
-                standEntity.addProjectile(snowBomb);
+                standEntity.shootProjectile(snowBomb,0.5F,1F);
                 standEntity.playSound(SoundEvents.SNOWBALL_THROW,1.0F,1.0F);
             }
         }
@@ -87,6 +130,11 @@ public class SnowBomb extends StandEntityAction {
             itemStack = izq;
         }
         return itemStack;
+    }
+
+    @Override
+    public StandAction[] getExtraUnlockable() {
+        return new StandAction[] { InitStands.KQ_BUBBLE_BOMB.get()};
     }
 
 }
