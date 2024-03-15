@@ -79,12 +79,12 @@ public class InitStands {
 
     public static final RegistryObject<StandEntityAction> KQ_ENTITY_EX = ACTIONS.register("kq_entity_explo",
             ()->new EntityExplode(new StandEntityAction.Builder().standWindupDuration(5)
-                    .staminaCost(250F).standPose(StandPose.RANGED_ATTACK)
+                    .staminaCost(250F).standPose(StandPose.RANGED_ATTACK).resolveLevelToUnlock(1)
                     .standSound(InitSounds.KQ_BOMB)));
 
     public static final RegistryObject<StandEntityAction> KQ_ENTITY_QUIT = ACTIONS.register("kq_entity_quit",
             ()->new EntityQuitBomb(new StandEntityAction.Builder().standWindupDuration(5)
-                    .staminaCost(250F).standPose(StandPose.RANGED_ATTACK).shiftVariationOf(KQ_ENTITY_EX)
+                    .staminaCost(250F).standPose(StandPose.RANGED_ATTACK).shiftVariationOf(KQ_ENTITY_EX).shiftVariationOf(KQ_ENTITY_BOMB)
                     .standSound(InitSounds.KQ_UNSUMMON)));
 
     public static final RegistryObject<StandEntityAction> KQ_SECOND_BOMB = ACTIONS.register("sheer_heart",
