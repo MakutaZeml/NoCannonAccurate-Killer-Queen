@@ -27,7 +27,6 @@ public class SheerHeartAttack extends StandEntityAction {
     @Override
     protected ActionConditionResult checkSpecificConditions(LivingEntity user, IStandPower power, ActionTarget target){
         List<SheerHeart> ListSH =isSHpresent(power);
-        String s_id = String.valueOf(user.getUUID());
         boolean able = true;
         for(SheerHeart sheerHeart:ListSH){
             if (sheerHeart.getOwner()==user){
@@ -54,8 +53,6 @@ public class SheerHeartAttack extends StandEntityAction {
                 }
             }
             if(able){
-                standEntity.playSound(InitSounds.KQ_SH_SUMMON.get(), 1F,1F);
-
                 SheerHeart sh = new SheerHeart(world);
                 sh.copyPosition(standEntity);
                 sh.setSummonedFromAbility();
@@ -74,6 +71,7 @@ public class SheerHeartAttack extends StandEntityAction {
         World world = user.level;
         return world.getEntitiesOfClass(SheerHeart.class, user.getBoundingBox().inflate(140), EntityPredicates.ENTITY_STILL_ALIVE).stream().collect(Collectors.toList());
     }
+
 
 
 

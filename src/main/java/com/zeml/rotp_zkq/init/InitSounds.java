@@ -16,7 +16,9 @@ public class InitSounds {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, RotpKillerQueen.MOD_ID);
 
     
-    public static final Supplier<SoundEvent> KQ_UNSUMMON = ModSounds.STAND_UNSUMMON_DEFAULT;
+    public static final Supplier<SoundEvent> KQ_UNSUMMON = SOUNDS.register("killer_queen_unsummon",
+            ()->new SoundEvent(new ResourceLocation(RotpKillerQueen.MOD_ID,"killer_queen_unsummon"))
+    );
 
 
     public static final Supplier<SoundEvent> KQ_SUMMON = SOUNDS.register("killer_queen_summon",

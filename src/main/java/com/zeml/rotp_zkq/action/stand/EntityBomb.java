@@ -81,7 +81,6 @@ public class EntityBomb extends StandEntityAction {
                        range,world,entity,e->!(e.is(standEntity) || e.is(user)),0,0);
                if(ray.getType() == RayTraceResult.Type.ENTITY){
                    Entity target =  ((EntityRayTraceResult) ray).getEntity();
-                   standEntity.playSound(InitSounds.USER_KQ.get(), 1,1);
                    standEntity.moveTo(target.position());
                    target.addTag(s_id);
                    if (user instanceof ServerPlayerEntity) {

@@ -44,7 +44,6 @@ public class SHABack extends StandEntityAction {
             for (SheerHeart sheerHeart: ListSH){
                 if(sheerHeart.getOwner()==user){
                     sheerHeart.die();
-                    user.playSound(InitSounds.KQ_UNSUMMON.get(),1,1);
                 }
             }
         }

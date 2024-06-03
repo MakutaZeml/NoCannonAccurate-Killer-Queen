@@ -1,5 +1,7 @@
 package com.zeml.rotp_zkq.action.stand;
 
+import com.github.standobyte.jojo.action.stand.StandEntityLightAttack;
+import net.minecraft.util.Hand;
 import org.jetbrains.annotations.NotNull;
 
 import com.github.standobyte.jojo.action.stand.StandEntityAction;
@@ -17,40 +19,40 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 
-public class EntityExplode extends StandEntityAction {
+public class EntityExplode extends StandEntityLightAttack {
 
 
-    public EntityExplode(StandEntityAction.Builder builder) {
+    public EntityExplode(StandEntityLightAttack.Builder builder) {
         super(builder);
     }
 
     @Override
     public void standPerform(@NotNull World world, StandEntity standEntity, IStandPower userPower, StandEntityTask task){
         if(!world.isClientSide){
-            Double range = 3*standEntity.getMaxRange();
-            LivingEntity user = userPower.getUser();
-            Double s_power = standEntity.getAttackDamage();
-            LivingEntity entity = LivingEntityBomb(userPower,range);
-            if(entity!= null){
-                double health = entity.getMaxHealth();
-                float ex_range = (float) (Math.log(health*s_power/2)/1.2);
-                float damage = (float) Math.sqrt(health*s_power);
+            if(userPower.getStamina() >249){
+                Double range = 3*standEntity.getMaxRange();
+                LivingEntity user = userPower.getUser();
+                Double s_power = standEntity.getAttackDamage();
+                LivingEntity entity = LivingEntityBomb(userPower,range);
+                if(entity!= null){
+                    double health = entity.getMaxHealth();
+                    float ex_range = (float) (Math.log(health*s_power/2)/1.2);
 
-                if(entity instanceof StandEntity){
-                    StandEntity stand = (StandEntity)  entity;
-                    LivingEntity use = stand.getUser();
-                    entity.level.explode(user,use.getX(),use.getY(),use.getZ(),ex_range, Explosion.Mode.NONE);
-                    user.hurt(DamageSource.explosion(user),damage);
-                }
-                else {
-                    entity.level.explode(user,entity.getX(),entity.getY(),entity.getZ(),ex_range, Explosion.Mode.NONE);
-                    entity.hurt(DamageSource.explosion(user),damage);
+                    if(entity instanceof StandEntity){
+                        StandEntity stand = (StandEntity)  entity;
+                        LivingEntity use = stand.getUser();
+                        entity.level.explode(user,use.getX(),use.getY(),use.getZ(),ex_range, Explosion.Mode.NONE);
+                    }
+                    else {
+                        entity.level.explode(user,entity.getX(),entity.getY(),entity.getZ(),ex_range, Explosion.Mode.NONE);
 
-                }
-                String s_id = String.valueOf(user.getUUID());
-                entity.removeTag(s_id);
-                if (user instanceof ServerPlayerEntity) {
-                    AddonPackets.sendToClient(new RemoveTagPacket(entity.getId(), s_id), (ServerPlayerEntity) user);
+
+                    }
+                    String s_id = String.valueOf(user.getUUID());
+                    entity.removeTag(s_id);
+                    if (user instanceof ServerPlayerEntity) {
+                        AddonPackets.sendToClient(new RemoveTagPacket(entity.getId(), s_id), (ServerPlayerEntity) user);
+                    }
                 }
             }
 
@@ -69,6 +71,13 @@ public class EntityExplode extends StandEntityAction {
     }
 
 
+    @Override
+    public void onTaskSet(World world, StandEntity standEntity, IStandPower standPower, StandEntityAction.Phase phase, StandEntityTask task, int ticks) {
+        if (standEntity.isArmsOnlyMode()) {
+            standEntity.setArmsOnlyMode(true, false);
+        }
+
+    }
 
 
 }

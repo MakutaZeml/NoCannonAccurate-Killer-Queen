@@ -90,7 +90,7 @@ public class SheerHeart extends MonsterEntity {
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new MasterHurtByTargetGoal(this));
         this.targetSelector.addGoal(2,new MasterHurtTargetGoal(this));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, MonsterEntity.class, true));
 
     }
 
@@ -265,7 +265,10 @@ public class SheerHeart extends MonsterEntity {
             Explosion.Mode explosion$mode = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE;
             float f = this.isPowered() ? 2.0F : 1.0F;
             this.dead = true;
-            this.level.explode(this, this.getX(), this.getY(), this.getZ(), (float)this.explosionRadius * f, explosion$mode);
+
+            LivingEntity explo = this.getOwner() == null?this:this.getOwner();
+
+            this.level.explode(explo, this.getX(), this.getY(), this.getZ(), (float)this.explosionRadius * f, explosion$mode);
             this.remove();
             this.spawnLingeringCloud();
         }

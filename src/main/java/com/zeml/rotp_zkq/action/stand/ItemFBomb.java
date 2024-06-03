@@ -2,6 +2,7 @@ package com.zeml.rotp_zkq.action.stand;
 
 import com.github.standobyte.jojo.action.ActionConditionResult;
 import com.github.standobyte.jojo.action.ActionTarget;
+import com.github.standobyte.jojo.action.stand.StandEntityLightAttack;
 import org.jetbrains.annotations.NotNull;
 
 import com.github.standobyte.jojo.action.stand.StandEntityAction;
@@ -14,8 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
-public class ItemFBomb extends StandEntityAction {
-    public ItemFBomb(StandEntityAction.Builder builder) {
+public class ItemFBomb extends StandEntityLightAttack {
+    public ItemFBomb(StandEntityLightAttack.Builder builder) {
         super(builder);
     }
 

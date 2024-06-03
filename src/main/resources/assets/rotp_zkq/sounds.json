@@ -46,6 +46,10 @@
   "killer_queen_summon":{
     "subtitle": "rotp_zkq.subtitle.killer_queen_summon",
     "sounds":["rotp_zkq:stand/killer_queen_summon","rotp_zkq:stand/killer_queen_summon_2","rotp_zkq:stand/killer_queen_summon_3","rotp_zkq:stand/killer_queen_summon_4","rotp_zkq:stand/killer_queen_summon_5","rotp_zkq:stand/killer_queen_summon_6"]
+  },
+  "killer_queen_unsummon":{
+    "subtitle": "rotp_zkq.subtitle.killer_queen_summon",
+    "sounds":["rotp_zkq:stand/killer_queen_unsummon"]
   }
 
 }
