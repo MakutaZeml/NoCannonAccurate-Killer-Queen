@@ -20,7 +20,6 @@ public class InitSounds {
             ()->new SoundEvent(new ResourceLocation(RotpKillerQueen.MOD_ID,"killer_queen_unsummon"))
     );
 
-
     public static final Supplier<SoundEvent> KQ_SUMMON = SOUNDS.register("killer_queen_summon",
             ()->new SoundEvent(new ResourceLocation(RotpKillerQueen.MOD_ID,"killer_queen_summon"))
     );
@@ -45,6 +44,9 @@ public class InitSounds {
     public static final RegistryObject<SoundEvent> KQ_BOMB= SOUNDS.register("killer_queen_boom",
             () -> new SoundEvent(new ResourceLocation(RotpKillerQueen.MOD_ID, "killer_queen_boom")));
 
+    public static final RegistryObject<SoundEvent> KQ_UNBOMB= SOUNDS.register("killer_queen_unboom",
+            () -> new SoundEvent(new ResourceLocation(RotpKillerQueen.MOD_ID, "killer_queen_unboom")));
+
     public static final RegistryObject<SoundEvent> USER_KQ = SOUNDS.register("user_kira",
             () -> new SoundEvent(new ResourceLocation(RotpKillerQueen.MOD_ID, "user_kira")));
 
@@ -59,7 +61,7 @@ public class InitSounds {
             ()-> new SoundEvent(new ResourceLocation(RotpKillerQueen.MOD_ID,"sheer_heart_step")));
 
 
-
+    public
     static final OstSoundList KQ_OST = new OstSoundList(new ResourceLocation(RotpKillerQueen.MOD_ID, "kq_ost"), SOUNDS);
 
 }

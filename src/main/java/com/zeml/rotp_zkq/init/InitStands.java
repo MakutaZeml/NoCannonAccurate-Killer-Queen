@@ -87,7 +87,7 @@ public class InitStands {
     public static final RegistryObject<StandEntityAction> KQ_ENTITY_QUIT = ACTIONS.register("kq_entity_quit",
             ()->new EntityQuitBomb(new StandEntityAction.Builder().standWindupDuration(5)
                     .staminaCost(50F).standPose(StandPose.RANGED_ATTACK).shiftVariationOf(KQ_ENTITY_EX).shiftVariationOf(KQ_ENTITY_BOMB)
-                    .standSound(InitSounds.KQ_UNSUMMON)));
+                    .standSound(InitSounds.KQ_UNBOMB)));
 
     public static final RegistryObject<StandEntityAction> KQ_BLOCK_BOMB = ACTIONS.register("kq_block_bomb",
             ()->new BlockBombAction(new StandEntityAction.Builder().standWindupDuration(5)
@@ -106,7 +106,7 @@ public class InitStands {
             ()->new BlockQuitBomb(new StandEntityLightAttack.Builder().standWindupDuration(5).shiftVariationOf(KQ_BLOCK_BOMB)
                     .shiftVariationOf(KQ_BLOCK_EXPLODE)
                     .staminaCost(5F).standPose(StandPose.RANGED_ATTACK)
-                    .standSound(InitSounds.KQ_UNSUMMON)));
+                    .standSound(InitSounds.KQ_UNBOMB)));
 
     public static final RegistryObject<StandEntityAction> KQ_SECOND_BOMB = ACTIONS.register("sheer_heart",
             ()->new SheerHeartAttack(new StandEntityAction.Builder().staminaCost(200)

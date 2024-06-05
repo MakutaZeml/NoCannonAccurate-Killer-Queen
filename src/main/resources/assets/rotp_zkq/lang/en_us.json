@@ -37,5 +37,7 @@
   "rotp_zkq.subtitle.sheer_heart_step": "Sheer Heart Attack step ",
   "rotp_zkq.subtitle.killer_queen_summon": "Killer Queen Summoned",
   "rotp_zkq.subtitle.killer_queen_punch": "Punch Sound",
-  "rotp_zkq.subtitle.killer_queen_punch_heavy": "Punch Sound"
+  "rotp_zkq.subtitle.killer_queen_punch_heavy": "Punch Sound",
+  "rotp_zkq.subtitle.killer_queen_unsummon": "Killer Queen unsummon",
+  "rotp_zkq.subtitle.killer_queen_unsbomb": "Killer Queen unbomb"
 }

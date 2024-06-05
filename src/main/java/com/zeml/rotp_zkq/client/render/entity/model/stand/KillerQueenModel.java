@@ -35,8 +35,8 @@ public class KillerQueenModel extends HumanoidStandModel<KQStandEntity> {
 		head.texOffs(17, 28).addBox(3.0F, -9.0F, -1.5F, 1.0F, 1.0F, 3.0F, 0.0F, false);
 		head.texOffs(24, 33).addBox(3.025F, -10.0F, -0.575F, 1.0F, 2.0F, 2.0F, 0.0F, false);
 
-		torso.texOffs(25, 24).addBox(-4.0F, 6.0F, -1.5F, 8.0F, 6.0F, 3.0F, 0.3F, false);
-		torso.texOffs(0, 16).addBox(-4.25F, -0.5F, -2.5F, 9.0F, 6.0F, 5.0F, 0.0F, false);
+		torso.texOffs(25, 24).addBox(-4.0F, 5.7F, -1.5F, 8.0F, 6.0F, 3.0F, 0.4F, false);
+		torso.texOffs(0, 16).addBox(-4.5F, -0.5F, -2.5F, 9.0F, 6.0F, 5.0F, 0.0F, false);
 
 		belt = new ModelRenderer(this);
 		belt.setPos(0.0F, 24.0F, 0.0F);

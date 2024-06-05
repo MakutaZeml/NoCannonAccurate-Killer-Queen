@@ -30,7 +30,8 @@ public class ExplodeBlockAction extends StandEntityLightAttack {
             KQStandEntity kqStand = (KQStandEntity) standEntity;
             BlockPos blockPos = kqStand.getBlockPos();
 
-            if(world.getBlockState(blockPos).getBlock() != Blocks.BEDROCK ||world.getBlockState(blockPos).getBlock() != Blocks.BARRIER ){
+
+            if(world.getBlockState(blockPos).getBlock().getBlock().getExplosionResistance(world.getBlockState(blockPos), world, blockPos, null)<3600000){
                 world.setBlockAndUpdate(blockPos, AIR);
             }
 
