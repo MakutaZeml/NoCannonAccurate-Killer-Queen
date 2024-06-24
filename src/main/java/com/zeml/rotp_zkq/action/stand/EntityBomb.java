@@ -4,7 +4,9 @@ import com.github.standobyte.jojo.action.Action;
 import com.github.standobyte.jojo.action.ActionConditionResult;
 import com.github.standobyte.jojo.action.ActionTarget;
 import com.github.standobyte.jojo.action.stand.StandAction;
+import com.github.standobyte.jojo.action.stand.StandEntityHeavyAttack;
 import com.zeml.rotp_zkq.init.InitStands;
+import net.minecraft.util.DamageSource;
 import org.jetbrains.annotations.NotNull;
 
 import com.github.standobyte.jojo.action.stand.StandEntityAction;
@@ -81,7 +83,6 @@ public class EntityBomb extends StandEntityAction {
                        range,world,entity,e->!(e.is(standEntity) || e.is(user)),0,0);
                if(ray.getType() == RayTraceResult.Type.ENTITY){
                    Entity target =  ((EntityRayTraceResult) ray).getEntity();
-                   standEntity.playSound(InitSounds.USER_KQ.get(), 1,1);
                    standEntity.moveTo(target.position());
                    target.addTag(s_id);
                    if (user instanceof ServerPlayerEntity) {
@@ -90,7 +91,6 @@ public class EntityBomb extends StandEntityAction {
                }
            }
        }
-
 
     }
 
@@ -101,6 +101,16 @@ public class EntityBomb extends StandEntityAction {
         return entidad;
    }
 
+    @Override
+    public boolean cancelHeldOnGettingAttacked(IStandPower power, DamageSource dmgSource, float dmgAmount) {
+        return true;
+    }
+
+
+    @Override
+    public boolean stopOnHeavyAttack(StandEntityHeavyAttack.HeavyPunchInstance punch) {
+        return true;
+    }
 
     @Override
     public StandAction[] getExtraUnlockable() {

@@ -7,6 +7,7 @@ import com.zeml.rotp_zkq.client.render.entity.renderer.auxiliarstand.SheerHeartR
 import com.zeml.rotp_zkq.client.render.entity.renderer.damaging.projectile.BubbleBombRenderer;
 import com.zeml.rotp_zkq.client.render.entity.renderer.damaging.projectile.SnowBombRenderer;
 import com.zeml.rotp_zkq.client.render.entity.renderer.stand.KillerQueenRenderer;
+import com.zeml.rotp_zkq.client.ui.marker.BlockBombMarker;
 import com.zeml.rotp_zkq.client.ui.marker.EntityBombMarker;
 import com.zeml.rotp_zkq.init.AddonStands;
 
@@ -37,5 +38,6 @@ public class ClientInit {
 
 
         MarkerRenderer.Handler.addRenderer(new EntityBombMarker(mc));
+        MarkerRenderer.Handler.addRenderer(new BlockBombMarker(mc));
     }
 }

@@ -1,9 +1,10 @@
 package com.zeml.rotp_zkq.client.ui.marker;
 
 import com.github.standobyte.jojo.client.ui.marker.MarkerRenderer;
-import com.github.standobyte.jojo.entity.stand.StandEntity;
 import com.github.standobyte.jojo.power.impl.stand.IStandPower;
+import com.github.standobyte.jojo.power.impl.stand.type.StandType;
 import com.zeml.rotp_zkq.RotpKillerQueen;
+import com.zeml.rotp_zkq.init.InitStands;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.EntityPredicates;
@@ -14,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
 
 
@@ -25,7 +27,19 @@ public class EntityBombMarker extends MarkerRenderer {
 
     @Override
     protected boolean shouldRender() {
-        return true;
+        AtomicBoolean render = new AtomicBoolean(false);
+
+        IStandPower.getStandPowerOptional(this.mc.player).ifPresent(power -> {
+            StandType<?> KQ = InitStands.KQ_STAND.getStandType();
+            if(power.getType() == KQ){
+                render.set(true);
+            }else {
+                render.set(false);
+            }
+        });
+
+
+        return render.get();
         }
 
     protected static class Marker extends MarkerRenderer.MarkerInstance {

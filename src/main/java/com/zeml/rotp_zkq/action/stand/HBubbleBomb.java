@@ -11,7 +11,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
