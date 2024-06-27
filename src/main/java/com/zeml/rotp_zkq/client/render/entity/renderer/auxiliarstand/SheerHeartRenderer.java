@@ -1,5 +1,6 @@
 package com.zeml.rotp_zkq.client.render.entity.renderer.auxiliarstand;
 
+import com.github.standobyte.jojo.client.ClientUtil;
 import com.zeml.rotp_zkq.RotpKillerQueen;
 
 import com.zeml.rotp_zkq.client.render.entity.model.auxiliarstand.SheerHeartModel;
@@ -10,7 +11,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class SheerHeartRenderer extends MobRenderer<SheerHeart, SheerHeartModel> {
 
-   protected static final ResourceLocation TEXTURE = new ResourceLocation(RotpKillerQueen.MOD_ID,"textures/entity/stand/sheer_heart.png");
+   protected static final ResourceLocation TEXTURE =  new ResourceLocation(RotpKillerQueen.MOD_ID,"textures/entity/stand/sheer_heart.png");
+   protected static final ResourceLocation VOID = new ResourceLocation(RotpKillerQueen.MOD_ID,"textures/entity/stand/void.png");
 
    public SheerHeartRenderer(EntityRendererManager rendererManager){
        super(rendererManager,new SheerHeartModel(),0F);
@@ -18,7 +20,7 @@ public class SheerHeartRenderer extends MobRenderer<SheerHeart, SheerHeartModel>
 
     @Override
     public ResourceLocation getTextureLocation(SheerHeart p_110775_1_) {
-        return TEXTURE;
+        return ClientUtil.canSeeStands()?TEXTURE:VOID;
     }
 
 

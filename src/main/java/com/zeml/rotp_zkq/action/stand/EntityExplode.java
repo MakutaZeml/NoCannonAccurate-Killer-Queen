@@ -2,6 +2,7 @@ package com.zeml.rotp_zkq.action.stand;
 
 import com.github.standobyte.jojo.action.stand.StandEntityHeavyAttack;
 import com.github.standobyte.jojo.action.stand.StandEntityLightAttack;
+import com.github.standobyte.jojo.entity.stand.StandPose;
 import net.minecraft.util.Hand;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,11 +22,13 @@ import net.minecraft.world.World;
 
 
 public class EntityExplode extends StandEntityLightAttack {
+    public static final StandPose DETONATE = new StandPose("DETONATE");
 
 
     public EntityExplode(StandEntityLightAttack.Builder builder) {
         super(builder);
     }
+
 
     @Override
     public void standPerform(@NotNull World world, StandEntity standEntity, IStandPower userPower, StandEntityTask task){

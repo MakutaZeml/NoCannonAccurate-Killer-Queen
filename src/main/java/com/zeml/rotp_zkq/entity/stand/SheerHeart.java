@@ -3,6 +3,7 @@ package com.zeml.rotp_zkq.entity.stand;
 
 import com.github.standobyte.jojo.action.non_stand.VampirismBloodDrain;
 
+import com.github.standobyte.jojo.init.ModStatusEffects;
 import com.github.standobyte.jojo.util.mod.JojoModUtil;
 import com.zeml.rotp_zkq.entity.ia.MasterHurtByTargetGoal;
 import com.zeml.rotp_zkq.entity.ia.MasterHurtTargetGoal;
@@ -47,6 +48,8 @@ public class SheerHeart extends MonsterEntity {
     private static final DataParameter<Boolean> DATA_IS_POWERED = EntityDataManager.defineId(SheerHeart.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> DATA_IS_IGNITED = EntityDataManager.defineId(SheerHeart.class, DataSerializers.BOOLEAN);
     private boolean summonedFromAbility = false;
+    private boolean IAon = true;
+    private int timer = 0;
     private int oldSwell;
     private int swell;
     private int maxSwell = 15;
@@ -147,25 +150,35 @@ public class SheerHeart extends MonsterEntity {
     @Override
     public void tick() {
         if (this.isAlive()) {
-            this.oldSwell = this.swell;
-            if (this.isIgnited()) {
-                this.setSwellDir(1);
+            if(this.IAon){
+                this.oldSwell = this.swell;
+                if (this.isIgnited()) {
+                    this.setSwellDir(1);
+                }
+
+                int i = this.getSwellDir();
+                if (i > 0 && this.swell == 0) {
+                    this.playSound(InitSounds.KQ_BOMB.get(), 1.0F, 0.5F);
+                }
+
+                this.swell += i;
+                if (this.swell < 0) {
+                    this.swell = 0;
+                }
+
+                if (this.swell >= this.maxSwell) {
+                    this.swell = this.maxSwell;
+                    this.explodeCreeper();
+
+                }
+            }else {
+                this.timer +=1;
+                if(this.timer >=200){
+                    this.IAon = true;
+                    this.timer = 0;
+                }
             }
 
-            int i = this.getSwellDir();
-            if (i > 0 && this.swell == 0) {
-                this.playSound(InitSounds.KQ_BOMB.get(), 1.0F, 0.5F);
-            }
-
-            this.swell += i;
-            if (this.swell < 0) {
-                this.swell = 0;
-            }
-
-            if (this.swell >= this.maxSwell) {
-                this.swell = this.maxSwell;
-                this.explodeCreeper();
-            }
         }
         super.tick();
     }
@@ -269,8 +282,13 @@ public class SheerHeart extends MonsterEntity {
             LivingEntity explo = this.getOwner() == null?this:this.getOwner();
 
             this.level.explode(explo, this.getX(), this.getY(), this.getZ(), (float)this.explosionRadius * f, explosion$mode);
-            this.remove();
+            if(this.getTarget() != null){
+                if(!this.getTarget().isAlive()){
+                    this.remove();
+                }
+            }
             this.spawnLingeringCloud();
+            if(this.getTarget() != null && this.getTarget().isAlive())this.IAon = false;
         }
 
     }

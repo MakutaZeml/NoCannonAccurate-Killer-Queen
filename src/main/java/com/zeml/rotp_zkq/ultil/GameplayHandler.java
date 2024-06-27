@@ -13,6 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.Hand;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -24,5 +25,18 @@ import java.util.Optional;
 @Mod.EventBusSubscriber(modid = RotpKillerQueen.MOD_ID)
 public class GameplayHandler {
 
+
+    @SubscribeEvent(priority =  EventPriority.LOW)
+    public static void onPlayerHurt(LivingHurtEvent event){
+        LivingEntity entity = event.getEntityLiving();
+        if(!entity.level.isClientSide){
+            IStandPower.getStandPowerOptional(entity).ifPresent(power -> {
+                if(power.getHeldAction() == InitStands.KQ_ENTITY_EX.get() && event.getAmount()>10){
+                    power.setCooldownTimer(InitStands.KQ_ENTITY_EX.get(),200);
+
+                }
+            });
+        }
+    }
 
 }

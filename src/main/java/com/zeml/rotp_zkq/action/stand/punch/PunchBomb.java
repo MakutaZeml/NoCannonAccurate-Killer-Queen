@@ -67,32 +67,6 @@ public class PunchBomb extends StandEntityLightAttack {
 
 
     @Override
-    public void standPerform(World world, StandEntity standEntity, IStandPower userPower, StandEntityTask task){
-        if(!world.isClientSide){
-
-            LivingEntity user = userPower.getUser();
-            String s_id = user.getUUID().toString();
-
-            if (task.getTarget().getType() == ActionTarget.TargetType.ENTITY){
-                Entity target = task.getTarget().getEntity();
-                if(!standEntity.isArmsOnlyMode() && target.distanceTo(standEntity)< standEntity.getMaxRange()){
-                    standEntity.moveTo(target.position());
-                }
-
-                if (target instanceof LivingEntity){
-                    standEntity.punch(task, this, task.getTarget());
-
-                }
-
-
-            }
-        }
-        super.standPerform(world, standEntity, userPower, task);
-    }
-
-
-
-    @Override
     public StandEntityPunch punchEntity(StandEntity stand, Entity target, StandEntityDamageSource dmgSource){
         if (target instanceof LivingEntity && !(target instanceof StandEntity)){
             String s_id =String.valueOf(Objects.requireNonNull(stand.getUser()).getUUID());
@@ -130,16 +104,11 @@ public class PunchBomb extends StandEntityLightAttack {
     }
 
 
-
     @Override
     public TargetRequirement getTargetRequirement() {
         return TargetRequirement.ENTITY;
     }
 
-    @Override
-    public boolean noAdheringToUserOffset(IStandPower standPower, StandEntity standEntity) {
-        return !standEntity.isArmsOnlyMode();
-    }
 
 
     @Override

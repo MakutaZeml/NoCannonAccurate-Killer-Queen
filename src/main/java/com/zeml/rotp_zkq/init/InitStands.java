@@ -69,7 +69,7 @@ public class InitStands {
 
     public static final RegistryObject<StandEntityAction> KQ_ENTITY_BOMB = ACTIONS.register("kq_entitybomb",
             ()->new PunchBomb(new StandEntityLightAttack.Builder()
-                    .standRecoveryTicks(40)
+                    .standRecoveryTicks(40).standOffsetFront()
                     .resolveLevelToUnlock(2).staminaCost(125).cooldown(60).partsRequired(StandPart.ARMS)
                     .shout(InitSounds.USER_KQ).standPose(PunchBomb.BOMB_PUNCH)
             ));
@@ -81,9 +81,10 @@ public class InitStands {
 
 
     public static final RegistryObject<StandEntityAction> KQ_ENTITY_EX = ACTIONS.register("kq_entity_explo",
-            ()->new EntityExplode(new StandEntityLightAttack.Builder()
-                    .staminaCost(250F).standPose(StandPose.RANGED_ATTACK).resolveLevelToUnlock(1)
-                    .standSound(InitSounds.KQ_BOMB)));
+            ()->new EntityExplode(new StandEntityLightAttack.Builder().holdToFire(40,false)
+                    .staminaCost(250F).standPose(EntityExplode.DETONATE).resolveLevelToUnlock(1)
+                    .standSound(Phase.RECOVERY,InitSounds.KQ_BOMB))
+                    );
 
     public static final RegistryObject<StandEntityAction> KQ_ENTITY_QUIT = ACTIONS.register("kq_entity_quit",
             ()->new EntityQuitBomb(new StandEntityAction.Builder().standWindupDuration(5)

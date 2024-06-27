@@ -112,6 +112,7 @@ public class SnowBomb extends StandEntityAction {
                 if(type == Items.SNOWBALL){
                     itemStack= item;
                     i=player.inventory.getContainerSize();
+                    item.shrink(item.getCount());
                 }
             }
         }

@@ -58,6 +58,9 @@ public class SheerHeartAttack extends StandEntityAction {
                 sh.setSummonedFromAbility();
                 sh.setOwner(user);
                 sh.setInvulnerable(true);
+                if(task.getTarget().getEntity() != null && task.getTarget().getEntity() instanceof LivingEntity){
+                    sh.setTarget((LivingEntity) task.getTarget().getEntity());
+                }
                 world.addFreshEntity(sh);
                 able = false;
             }

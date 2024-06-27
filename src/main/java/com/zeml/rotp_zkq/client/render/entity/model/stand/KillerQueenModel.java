@@ -1,6 +1,8 @@
 package com.zeml.rotp_zkq.client.render.entity.model.stand;
 
+import com.github.standobyte.jojo.client.render.entity.pose.ModelPoseTransition;
 import com.github.standobyte.jojo.client.render.entity.pose.ModelPoseTransitionMultiple;
+import com.zeml.rotp_zkq.action.stand.EntityExplode;
 import com.zeml.rotp_zkq.action.stand.punch.PunchBomb;
 import com.zeml.rotp_zkq.entity.stand.stands.KQStandEntity;
 import com.github.standobyte.jojo.action.stand.StandEntityAction;
@@ -203,6 +205,19 @@ public class KillerQueenModel extends HumanoidStandModel<KQStandEntity> {
 				RotationAngle.fromDegrees(rightLowerLeg,14.66f, -0.25f, -3.21f)
 
 		);
+
+		actionAnim.put(EntityExplode.DETONATE,new PosedActionAnimation.Builder<KQStandEntity>()
+				.addPose(StandEntityAction.Phase.BUTTON_HOLD, new ModelPoseTransitionMultiple.Builder<>(bomb1_pose)
+						.addPose(0.5F, bomb2_pose)
+						.build(bomb3_pose))
+				.addPose(StandEntityAction.Phase.PERFORM, new ModelPoseTransitionMultiple.Builder<>(bomb1_pose)
+						.addPose(0.5F, bomb3_pose)
+						.build(bomb4_pose))
+				.addPose(StandEntityAction.Phase.RECOVERY, new ModelPoseTransitionMultiple.Builder<>(bomb4_pose)
+						.addPose(0.5F, bomb4_pose)
+						.build(idlePose))
+				.build(idlePose));
+
 
 		actionAnim.put(PunchBomb.BOMB_PUNCH, new PosedActionAnimation.Builder<KQStandEntity>()
 				.addPose(StandEntityAction.Phase.WINDUP, new ModelPoseTransitionMultiple.Builder<>(punchBomb1)
