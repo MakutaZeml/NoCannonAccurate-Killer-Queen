@@ -19,6 +19,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
@@ -26,9 +27,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class SnowBomb extends StandEntityAction {
+public class SnowBomb extends StandAction {
     INonStandPower pow;
-    public SnowBomb(StandEntityAction.Builder builder) {
+    public SnowBomb(StandAction.Builder builder) {
         super(builder);
     }
 
@@ -57,7 +58,7 @@ public class SnowBomb extends StandEntityAction {
     protected ActionConditionResult checkSpecificConditions(LivingEntity user, IStandPower power, ActionTarget target){
         if (user instanceof PlayerEntity){
             PlayerEntity player = (PlayerEntity) user;
-            ItemStack stack = GetSnowItemsP(player);
+            ItemStack stack = GetSnowItemsP(player, false);
             Item type = stack.getItem();
             if (type == Items.SNOWBALL){
                 return ActionConditionResult.POSITIVE;
@@ -76,34 +77,30 @@ public class SnowBomb extends StandEntityAction {
         }
     }
 
+
     @Override
-    public void standPerform(@NotNull World world, StandEntity standEntity, IStandPower userPower, StandEntityTask task){
-        if (!world.isClientSide){
-            LivingEntity user = userPower.getUser();
-            if(user instanceof PlayerEntity){
+    protected void perform(World world, LivingEntity user, IStandPower power, ActionTarget target) {
+        if (!world.isClientSide) {
+            if (user instanceof PlayerEntity) {
                 PlayerEntity player = (PlayerEntity) user;
-                ItemStack itemStack =GetSnowItemsP(player);
+                ItemStack itemStack =GetSnowItemsP(player, true);
                 Item type = itemStack.getItem();
                 if(type == Items.SNOWBALL){
-                    SnowBombEntity snowBomb = new SnowBombEntity(player, world,  userPower);
-                    standEntity.shootProjectile(snowBomb,0.5F,1F);
-                    standEntity.playSound(SoundEvents.SNOWBALL_THROW,1.0F,1.0F);
+                    SnowBombEntity snowBomb = new SnowBombEntity(player, world,  power);
+                    snowBomb.shootFromRotation(user,.25F,1F);
+                    world.addFreshEntity(snowBomb);
+                    user.playSound(SoundEvents.SNOWBALL_THROW,1.0F,1.0F);
                 }
-
-            }
-            else
+            }else
             {
-                ItemStack itemStack = GetSnowItem(user);
-                SnowBombEntity snowBomb = new SnowBombEntity(user, world,  userPower);
-                standEntity.shootProjectile(snowBomb,0.5F,1F);
-                standEntity.playSound(SoundEvents.SNOWBALL_THROW,1.0F,1.0F);
+                SnowBombEntity snowBomb = new SnowBombEntity(user, world,  power);
+                snowBomb.shootFromRotation(user,.5F,1F);
+                world.playSound(null,user.blockPosition(),SoundEvents.SNOWBALL_THROW, SoundCategory.PLAYERS,1.0F,1.0F);
             }
         }
     }
 
-
-
-    public static ItemStack GetSnowItemsP(@NotNull PlayerEntity player){
+    public static ItemStack GetSnowItemsP(@NotNull PlayerEntity player, boolean delete){
         ItemStack itemStack = ItemStack.EMPTY;
         for(int i=0;i<player.inventory.getContainerSize();i++){
             ItemStack item = player.inventory.getItem(i);
@@ -112,7 +109,9 @@ public class SnowBomb extends StandEntityAction {
                 if(type == Items.SNOWBALL){
                     itemStack= item;
                     i=player.inventory.getContainerSize();
-                    item.shrink(item.getCount());
+                    if(delete){
+                        item.shrink(1);
+                    }
                 }
             }
         }

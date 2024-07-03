@@ -1,5 +1,7 @@
 package com.zeml.rotp_zkq.action.stand;
 
+import com.github.standobyte.jojo.action.ActionTarget;
+import com.github.standobyte.jojo.action.stand.StandAction;
 import com.github.standobyte.jojo.action.stand.StandEntityAction;
 import com.github.standobyte.jojo.entity.stand.StandEntity;
 import com.github.standobyte.jojo.entity.stand.StandEntityTask;
@@ -14,19 +16,19 @@ import net.minecraft.item.Items;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-public class HBubbleBomb extends StandEntityAction {
-    public HBubbleBomb(StandEntityAction.Builder builder) {
+public class HBubbleBomb extends StandAction {
+    public HBubbleBomb(StandAction.Builder builder) {
         super(builder);
     }
 
 
+
     @Override
-    public void standPerform(@NotNull World world, StandEntity standEntity, IStandPower userPower, StandEntityTask task){
-        if (!world.isClientSide){
-            LivingEntity user = standEntity.getUser();
-            BubbleBombEntity bubble = new BubbleBombEntity(user, world,  userPower);
-            standEntity.shootProjectile(bubble,.25F,1F);
+    protected void perform(World world, LivingEntity user, IStandPower power, ActionTarget target) {
+        if(world.isClientSide){
+            BubbleBombEntity bubble = new BubbleBombEntity(user, world,  power);
+            bubble.shootFromRotation(user,.25F,1F);
+            world.addFreshEntity(bubble);
         }
     }
-
 }

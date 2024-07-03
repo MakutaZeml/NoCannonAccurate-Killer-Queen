@@ -120,12 +120,12 @@ public class InitStands {
                     .standSound(InitSounds.KQ_UNSUMMON)
             ));
 
-    public static final RegistryObject<StandEntityAction> KQ_SNOW_BOMB = ACTIONS.register("kq_snow_bomb",
-            ()->new SnowBomb(new StandEntityAction.Builder().staminaCost(100).resolveLevelToUnlock(4).cooldown(25).partsRequired(StandPart.ARMS)
+    public static final RegistryObject<StandAction> KQ_SNOW_BOMB = ACTIONS.register("kq_snow_bomb",
+            ()->new SnowBomb(new StandAction.Builder().staminaCost(100).resolveLevelToUnlock(4).cooldown(25).partsRequired(StandPart.ARMS)
                     ));
 
-    public static final RegistryObject<StandEntityAction> KQ_BUBBLE_BOMB = ACTIONS.register("kq_bubble_bomb",
-            ()->new HBubbleBomb(new StandEntityAction.Builder().staminaCost(100).cooldown(25).partsRequired(StandPart.ARMS)
+    public static final RegistryObject<StandAction> KQ_BUBBLE_BOMB = ACTIONS.register("kq_bubble_bomb",
+            ()->new HBubbleBomb(new StandAction.Builder().staminaCost(100).cooldown(25).partsRequired(StandPart.ARMS)
             ));
 
     public static final RegistryObject<StandEntityAction> KQ_SNOW_EXPLODE = ACTIONS.register("snow_explode",

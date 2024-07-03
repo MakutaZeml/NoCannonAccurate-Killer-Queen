@@ -40,7 +40,7 @@ public class EntityBombMarker extends MarkerRenderer {
 
 
         return render.get();
-        }
+    }
 
     protected static class Marker extends MarkerRenderer.MarkerInstance {
         public Marker(Vector3d pos, boolean outlined) {

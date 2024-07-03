@@ -3,6 +3,7 @@ package com.zeml.rotp_zkq.action.stand;
 import com.github.standobyte.jojo.action.stand.StandEntityHeavyAttack;
 import com.github.standobyte.jojo.action.stand.StandEntityLightAttack;
 import com.github.standobyte.jojo.entity.stand.StandPose;
+import com.github.standobyte.jojo.util.mc.MCUtil;
 import net.minecraft.util.Hand;
 import org.jetbrains.annotations.NotNull;
 
@@ -66,11 +67,8 @@ public class EntityExplode extends StandEntityLightAttack {
 
     public static LivingEntity LivingEntityBomb(@NotNull IStandPower standuser, Double range){
         LivingEntity user = standuser.getUser();
-        World world =user.level;
         String s_id =  String.valueOf(user.getUUID());
-        LivingEntity entidad = world.getEntitiesOfClass(LivingEntity.class,user.getBoundingBox().inflate(range),
-                EntityPredicates.ENTITY_STILL_ALIVE).stream().filter(entity -> entity.getTags().contains(s_id)).findFirst().orElse(null);
-        return entidad;
+        return MCUtil.entitiesAround(LivingEntity.class,user,range,false,entity -> entity.getTags().contains(s_id)).stream().findFirst().orElse(null);
 
     }
 

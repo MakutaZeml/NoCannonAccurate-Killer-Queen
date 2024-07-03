@@ -5,6 +5,7 @@ import com.github.standobyte.jojo.action.ActionConditionResult;
 import com.github.standobyte.jojo.action.ActionTarget;
 import com.github.standobyte.jojo.action.stand.StandAction;
 import com.github.standobyte.jojo.action.stand.StandEntityHeavyAttack;
+import com.github.standobyte.jojo.util.mc.MCUtil;
 import com.zeml.rotp_zkq.init.InitStands;
 import net.minecraft.util.DamageSource;
 import org.jetbrains.annotations.NotNull;
@@ -67,39 +68,37 @@ public class EntityBomb extends StandEntityAction {
 
     @Override
     public void standPerform(@NotNull World world, StandEntity standEntity, IStandPower userPower, StandEntityTask task){
-       if(!world.isClientSide){
-           LivingEntity user = userPower.getUser();
-           String s_id = String.valueOf(user.getUUID());
-           double range = standEntity.getMaxRange();
+        if(!world.isClientSide){
+            LivingEntity user = userPower.getUser();
+            String s_id = String.valueOf(user.getUUID());
+            double range = standEntity.getMaxRange();
 
 
 
-           Entity exist = EntityRange(userPower,2*range,s_id);
+            Entity exist = EntityRange(userPower,2*range,s_id);
 
-           if(exist == null){
-               LivingEntity entity = standEntity.isManuallyControlled() ? standEntity:user;
+            if(exist == null){
+                LivingEntity entity = standEntity.isManuallyControlled() ? standEntity:user;
 
-               RayTraceResult ray = JojoModUtil.rayTrace(entity.getEyePosition(1.0F),entity.getLookAngle(),
-                       range,world,entity,e->!(e.is(standEntity) || e.is(user)),0,0);
-               if(ray.getType() == RayTraceResult.Type.ENTITY){
-                   Entity target =  ((EntityRayTraceResult) ray).getEntity();
-                   standEntity.moveTo(target.position());
-                   target.addTag(s_id);
-                   if (user instanceof ServerPlayerEntity) {
-                       AddonPackets.sendToClient(new AddTagPacket(target.getId(), s_id), (ServerPlayerEntity) user);
-                   }
-               }
-           }
-       }
+                RayTraceResult ray = JojoModUtil.rayTrace(entity.getEyePosition(1.0F),entity.getLookAngle(),
+                        range,world,entity,e->!(e.is(standEntity) || e.is(user)),0,0);
+                if(ray.getType() == RayTraceResult.Type.ENTITY){
+                    Entity target =  ((EntityRayTraceResult) ray).getEntity();
+                    standEntity.moveTo(target.position());
+                    target.addTag(s_id);
+                    if (user instanceof ServerPlayerEntity) {
+                        AddonPackets.sendToClient(new AddTagPacket(target.getId(), s_id), (ServerPlayerEntity) user);
+                    }
+                }
+            }
+        }
 
     }
 
-   public static Entity EntityRange(@NotNull IStandPower userPower, double range, String id){
+    public static Entity EntityRange(@NotNull IStandPower userPower, double range, String id){
         LivingEntity user= userPower.getUser();
-        World world =user.level;
-        Entity entidad = world.getEntities(null,user.getBoundingBox().inflate(range)).stream().filter(entity -> entity.getTags().contains(id)).findFirst().orElse(null);
-        return entidad;
-   }
+        return MCUtil.entitiesAround(LivingEntity.class,user,range,false,entity -> entity.getTags().contains(id)).stream().findFirst().orElse(null);
+    }
 
     @Override
     public boolean cancelHeldOnGettingAttacked(IStandPower power, DamageSource dmgSource, float dmgAmount) {

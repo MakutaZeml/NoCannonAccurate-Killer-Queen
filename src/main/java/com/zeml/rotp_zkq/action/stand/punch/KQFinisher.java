@@ -21,8 +21,9 @@ public class KQFinisher extends StandEntityHeavyAttack {
 
     @Override
     public StandEntityPunch punchEntity(StandEntity stand, Entity target, StandEntityDamageSource dmgSource){
-        if(stand.getUser() != null && target != null){
-            String s_id =String.valueOf(Objects.requireNonNull(stand.getUser()).getUUID());
+        LivingEntity user = stand.getUser();
+        if(user != null && target != null){
+            String s_id =String.valueOf(Objects.requireNonNull(user.getUUID()));
             target.addTag(s_id);
         }
         return super.punchEntity(stand, target,dmgSource).addKnockback(0.5F + stand.getLastHeavyFinisherValue())

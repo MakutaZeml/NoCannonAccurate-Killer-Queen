@@ -69,11 +69,14 @@ public class PunchBomb extends StandEntityLightAttack {
     @Override
     public StandEntityPunch punchEntity(StandEntity stand, Entity target, StandEntityDamageSource dmgSource){
         if (target instanceof LivingEntity && !(target instanceof StandEntity)){
-            String s_id =String.valueOf(Objects.requireNonNull(stand.getUser()).getUUID());
-            target.addTag(s_id);
-            if (stand.getUser() instanceof ServerPlayerEntity) {
-                AddonPackets.sendToClient(new AddTagPacket(target.getId(), s_id), (ServerPlayerEntity) stand.getUser());
+            if(stand.getUser() != null){
+                String s_id =String.valueOf(Objects.requireNonNull(stand.getUser()).getUUID());
+                target.addTag(s_id);
+                if (stand.getUser() instanceof ServerPlayerEntity) {
+                    AddonPackets.sendToClient(new AddTagPacket(target.getId(), s_id), (ServerPlayerEntity) stand.getUser());
+                }
             }
+
         }
         return super.punchEntity(stand, target,dmgSource).damage(1F);
     }

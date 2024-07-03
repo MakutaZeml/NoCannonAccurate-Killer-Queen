@@ -17,17 +17,14 @@ public class SnowBombModel extends EntityModel<SnowBombEntity> {
 
 
 	public SnowBombModel() {
-		texWidth = 64;
-		texHeight = 64;
+		texWidth = 16;
+		texHeight = 16;
 		bb_main = new ModelRenderer(this);
-		bb_main.setPos(0.0F, 24.0F, 0.0F);
-		bb_main.texOffs(-2, -2).addBox(-2.0F, -12.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, false);
-		bb_main.texOffs(-10, -10).addBox(-2.0F, -8.0F, -6.0F, 4.0F, 4.0F, 12.0F, 0.0F, false);
-		bb_main.texOffs(-2, -2).addBox(-6.0F, -8.0F, -2.0F, 12.0F, 4.0F, 4.0F, 0.0F, false);
-		bb_main.texOffs(-4, -4).addBox(-5.0F, -9.0F, -3.0F, 10.0F, 6.0F, 6.0F, 0.0F, false);
-		bb_main.texOffs(-8, -8).addBox(-3.0F, -9.0F, -5.0F, 6.0F, 6.0F, 10.0F, 0.0F, false);
-		bb_main.texOffs(-4, -4).addBox(-3.0F, -11.0F, -3.0F, 6.0F, 10.0F, 6.0F, 0.0F, false);
-		bb_main.texOffs(0, 0).addBox(-4.0F, -10.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F, false);
+		bb_main.setPos(0.0F, 0.0F, 0.0F);
+		bb_main.texOffs(0, 0).addBox(-1.0F, -2.0F, -1.0F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+		bb_main.texOffs(6, 0).addBox(-1.0F, -1.5F, -0.5F, 2.0F, 1.0F, 1.0F, 0.2F, false);
+		bb_main.texOffs(0, 4).addBox(-0.5F, -2.0F, -0.5F, 1.0F, 2.0F, 1.0F, 0.2F, false);
+		bb_main.texOffs(6, 2).addBox(-0.5F, -1.5F, -1.0F, 1.0F, 1.0F, 2.0F, 0.2F, false);
 	}
 
 
