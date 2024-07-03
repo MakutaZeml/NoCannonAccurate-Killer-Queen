@@ -81,7 +81,7 @@ public class InitStands {
 
 
     public static final RegistryObject<StandEntityAction> KQ_ENTITY_EX = ACTIONS.register("kq_entity_explo",
-            ()->new EntityExplode(new StandEntityLightAttack.Builder().holdToFire(40,false)
+            ()->new EntityExplode(new StandEntityLightAttack.Builder().holdToFire(20,false)
                     .staminaCost(250F).standPose(EntityExplode.DETONATE).resolveLevelToUnlock(1)
                     .standSound(Phase.RECOVERY,InitSounds.KQ_BOMB))
                     );
