@@ -25,7 +25,7 @@ public class HBubbleBomb extends StandAction {
 
     @Override
     protected void perform(World world, LivingEntity user, IStandPower power, ActionTarget target) {
-        if(world.isClientSide){
+        if(!world.isClientSide){
             BubbleBombEntity bubble = new BubbleBombEntity(user, world,  power);
             bubble.shootFromRotation(user,.25F,1F);
             world.addFreshEntity(bubble);
