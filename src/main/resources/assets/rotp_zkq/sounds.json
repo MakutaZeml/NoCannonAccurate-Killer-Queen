@@ -54,6 +54,13 @@
   "killer_queen_unbomb":{
     "subtitle": "rotp_zkq.subtitle.killer_queen_unsbomb",
     "sounds":["rotp_zkq:stand/killer_queen_unsbomb"]
+  },
+  "bites_za_dust":{
+    "subtitle": "rotp_zkq.subtitle.bites_reversal_short",
+    "sounds":["rotp_zkq:stand/bites_reversal_short"]
+  },
+  "user_bites_za_dust":{
+    "subtitle": "rotp_zkq.subtitle.user_bites_za_dust",
+    "sounds":["rotp_zkq:stand_user/bites_za_dust"]
   }
-
 }

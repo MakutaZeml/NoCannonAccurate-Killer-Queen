@@ -1,10 +1,12 @@
 {
   "entity.rotp_zkq.killer_queen": "Killer Queen",
+  "entity.rotp_zkq.bites_za_dust": "Bites Za Dust",
   "entity.rotp_zkq.sheer_heart": "Sheer Heart Attack",
   "entity.rotp_zkq.snow_bomb": "Nieve Bomba",
   "entity.rotp_zkq.bubble_bomb": "Burbuja Bomba",
 
   "stand.rotp_zkq.killer_queen": "Killer Queen",
+  "stand.rotp_zkq.bites_za_dust": "Bites Za Dust",
 
   "action.rotp_zkq.kq_punch": "Golpe",
   "action.rotp_zkq.kq_heavy_punch": "Gancho",
@@ -21,11 +23,15 @@
   "action.rotp_zkq.kq_snow_bomb": "Nieve Explosiva",
   "action.rotp_zkq.kq_bubble_bomb": "Burbuja Explosiva",
   "action.rotp_zkq.sheer_heart": "Sheer Heart Attack",
-  "action.rotp_zkq.shear_heart_back":"Recoger Sheer Heart Attack",
-  "action.rotp_zkq.kq_combo_punch":"Gancho Explosivo",
+  "action.rotp_zkq.shear_heart_back": "Recoger Sheer Heart Attack",
+  "action.rotp_zkq.kq_combo_punch": "Gancho Explosivo",
   "action.rotp_zkq.snow_explode": "Explotar Proyectil",
+  "action.rotp_zkq.time_mark": "Poner punto temporal",
+  "action.rotp_zkq.kq_reset": "Retroceder Tiempo",
+  "action.rotp_zkq.remov_mark": "Remove Time Point",
+  "action.rotp_zkq.put_dust": "Pner Tercera Bomba",
 
-
+  "action.rotp_zkq.quit_dust": "Quitar Tercera Bomba",
 
   "rotp_zkq.subtitle.kq_name": "\"Killer Queen\"",
   "rotp_zkq.subtitle.shiba": "Shiba",
@@ -39,5 +45,6 @@
   "rotp_zkq.subtitle.killer_queen_punch": "Sonido de Golpe",
   "rotp_zkq.subtitle.killer_queen_punch_heavy": "Sonido de Gancho",
   "rotp_zkq.subtitle.killer_queen_unsummon": "Killer Queen rajandose",
-  "rotp_zkq.subtitle.killer_queen_unsbomb": "Killer Queen quitando bomba"
+  "rotp_zkq.subtitle.killer_queen_unsbomb": "Killer Queen quitando bomba",
+  "rotp_zkq.subtitle.bites_reversal_short": "Bites Za Dust"
 }

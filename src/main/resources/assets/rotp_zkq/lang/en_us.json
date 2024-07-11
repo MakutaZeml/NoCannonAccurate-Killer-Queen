@@ -1,10 +1,12 @@
 {
   "entity.rotp_zkq.killer_queen": "Killer Queen",
+  "entity.rotp_zkq.bites_za_dust": "Bites Za Dust",
   "entity.rotp_zkq.sheer_heart": "Sheer Heart Attack",
   "entity.rotp_zkq.snow_bomb": "Snow Bomb",
   "entity.rotp_zkq.bubble_bomb": "Bubble Bomb",
 
   "stand.rotp_zkq.killer_queen": "Killer Queen",
+  "stand.rotp_zkq.bites_za_dust": "Bites Za Dust",
 
   "action.rotp_zkq.kq_punch": "Punch",
   "action.rotp_zkq.kq_heavy_punch": "Heavy Punch",
@@ -24,8 +26,12 @@
   "action.rotp_zkq.shear_heart_back":"Pick Up Sheer Heart Attack",
   "action.rotp_zkq.kq_combo_punch":"Bombastic Finisher",
   "action.rotp_zkq.snow_explode": "Projectile explode",
+  "action.rotp_zkq.time_mark": "Put Time Point",
+  "action.rotp_zkq.kq_reset": "Time Reset",
+  "action.rotp_zkq.remov_mark": "Remove Time Point",
+  "action.rotp_zkq.put_dust": "Put Third Bomb",
 
-
+  "action.rotp_zkq.quit_dust": "Quit Third Bomb",
 
   "rotp_zkq.subtitle.kq_name": "\"Killer Queen\"",
   "rotp_zkq.subtitle.shiba": "Shiba",
@@ -39,5 +45,10 @@
   "rotp_zkq.subtitle.killer_queen_punch": "Punch Sound",
   "rotp_zkq.subtitle.killer_queen_punch_heavy": "Punch Sound",
   "rotp_zkq.subtitle.killer_queen_unsummon": "Killer Queen unsummon",
-  "rotp_zkq.subtitle.killer_queen_unsbomb": "Killer Queen unbomb"
+  "rotp_zkq.subtitle.killer_queen_unsbomb": "Killer Queen unbomb",
+  "rotp_zkq.subtitle.bites_reversal_short": "Bites Za Dust",
+  "rotp_zkq.subtitle.user_bites_za_dust": "Killer Queen in the Eye",
+
+  "jojo.message.action_condition.bites_za_has": "This Entity already is marked by someone",
+  "jojo.message.action_condition.is_stand_user": "You can Only put the third bomb in Non-Stand users"
 }
