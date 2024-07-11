@@ -13,6 +13,7 @@ import com.github.standobyte.jojo.entity.stand.StandPose;
 import com.github.standobyte.jojo.entity.stand.StandStatFormulas;
 import com.github.standobyte.jojo.power.impl.stand.IStandPower;
 import com.github.standobyte.jojo.power.impl.stand.StandUtil;
+import com.github.standobyte.jojo.util.mc.MCUtil;
 import com.github.standobyte.jojo.util.mc.damage.StandEntityDamageSource;
 import com.github.standobyte.jojo.util.mod.JojoModUtil;
 import com.ibm.icu.util.EthiopicCalendar;
@@ -20,6 +21,7 @@ import com.zeml.rotp_zkq.init.InitSounds;
 import com.zeml.rotp_zkq.init.InitStands;
 import com.zeml.rotp_zkq.network.AddonPackets;
 import com.zeml.rotp_zkq.network.server.AddTagPacket;
+import com.zeml.rotp_zkq.ultil.GameplayHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -47,8 +49,7 @@ public class PunchBomb extends StandEntityLightAttack {
 
     @Override
     protected Action<IStandPower> replaceAction(IStandPower power, ActionTarget target) {
-        String s_id = String.valueOf(power.getUser().getUUID());
-        Entity exist = EntityRange(power, 16, s_id);
+        Entity exist = EntityRange(power, 16);
         if (exist != null) {
             return InitStands.KQ_ENTITY_EX.get();
         }
@@ -70,13 +71,9 @@ public class PunchBomb extends StandEntityLightAttack {
     public StandEntityPunch punchEntity(StandEntity stand, Entity target, StandEntityDamageSource dmgSource){
         if (target instanceof LivingEntity && !(target instanceof StandEntity)){
             if(stand.getUser() != null){
-                String s_id =String.valueOf(Objects.requireNonNull(stand.getUser()).getUUID());
-                target.addTag(s_id);
-                if (stand.getUser() instanceof ServerPlayerEntity) {
-                    AddonPackets.sendToClient(new AddTagPacket(target.getId(), s_id), (ServerPlayerEntity) stand.getUser());
-                }
+                LivingEntity user = stand.getUser();
+                GameplayHandler.userToBomb.put(user,target.getUUID());
             }
-
         }
         return super.punchEntity(stand, target,dmgSource).damage(1F);
     }
@@ -99,11 +96,9 @@ public class PunchBomb extends StandEntityLightAttack {
     }
 
 
-    public static Entity EntityRange(@NotNull IStandPower userPower, double range, String id) {
+    public static Entity EntityRange(@NotNull IStandPower userPower, double range) {
         LivingEntity user = userPower.getUser();
-        World world = user.level;
-        Entity entidad = world.getEntities(null, user.getBoundingBox().inflate(range)).stream().filter(entity -> entity.getTags().contains(id)).findFirst().orElse(null);
-        return entidad;
+        return MCUtil.entitiesAround(LivingEntity.class,user,range,false,livingEntity -> livingEntity.getUUID().equals(GameplayHandler.userToBomb.get(user))).stream().findFirst().orElse(null);
     }
 
 

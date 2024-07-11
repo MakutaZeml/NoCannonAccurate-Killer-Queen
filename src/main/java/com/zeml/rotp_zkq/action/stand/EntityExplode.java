@@ -4,6 +4,11 @@ import com.github.standobyte.jojo.action.stand.StandEntityHeavyAttack;
 import com.github.standobyte.jojo.action.stand.StandEntityLightAttack;
 import com.github.standobyte.jojo.entity.stand.StandPose;
 import com.github.standobyte.jojo.util.mc.MCUtil;
+import com.zeml.rotp_zkq.action.stand.punch.PunchBomb;
+import com.zeml.rotp_zkq.network.server.RemoveBombPacket;
+import com.zeml.rotp_zkq.ultil.GameplayHandler;
+import net.minecraft.entity.Entity;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.Hand;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,16 +38,13 @@ public class EntityExplode extends StandEntityLightAttack {
 
     @Override
     public void standPerform(@NotNull World world, StandEntity standEntity, IStandPower userPower, StandEntityTask task){
+        LivingEntity user = userPower.getUser();
         if(!world.isClientSide){
             if(userPower.getStamina() >249){
-                Double range = 3*standEntity.getMaxRange();
-                LivingEntity user = userPower.getUser();
-                Double s_power = standEntity.getAttackDamage();
-                LivingEntity entity = LivingEntityBomb(userPower,range);
+                double range = 3*standEntity.getMaxRange();
+                Entity entity = PunchBomb.EntityRange(userPower,range);
                 if(entity!= null){
-                    double health = entity.getMaxHealth();
                     float ex_range = (float) (Math.sqrt(14*entity.getBbHeight()*entity.getBbWidth()*entity.getBbWidth()));
-
                     if(entity instanceof StandEntity){
                         StandEntity stand = (StandEntity)  entity;
                         LivingEntity use = stand.getUser();
@@ -50,27 +52,17 @@ public class EntityExplode extends StandEntityLightAttack {
                     }
                     else {
                         entity.level.explode(user,entity.getX(),entity.getY(),entity.getZ(),ex_range, Explosion.Mode.NONE);
-
-
-                    }
-                    String s_id = String.valueOf(user.getUUID());
-                    entity.removeTag(s_id);
-                    if (user instanceof ServerPlayerEntity) {
-                        AddonPackets.sendToClient(new RemoveTagPacket(entity.getId(), s_id), (ServerPlayerEntity) user);
                     }
                 }
             }
+            GameplayHandler.userToBomb.remove(user);
 
+        }
+        if(user instanceof  ServerPlayerEntity){
+            AddonPackets.sendToClient(new RemoveBombPacket(user.getId()),(ServerPlayerEntity) user);
         }
     }
 
-
-    public static LivingEntity LivingEntityBomb(@NotNull IStandPower standuser, Double range){
-        LivingEntity user = standuser.getUser();
-        String s_id =  String.valueOf(user.getUUID());
-        return MCUtil.entitiesAround(LivingEntity.class,user,range,false,entity -> entity.getTags().contains(s_id)).stream().findFirst().orElse(null);
-
-    }
 
     @Override
     public boolean cancelHeldOnGettingAttacked(IStandPower power, DamageSource dmgSource, float dmgAmount) {

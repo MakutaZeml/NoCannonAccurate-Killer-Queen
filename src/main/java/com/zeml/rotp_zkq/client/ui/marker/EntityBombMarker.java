@@ -3,9 +3,12 @@ package com.zeml.rotp_zkq.client.ui.marker;
 import com.github.standobyte.jojo.client.ui.marker.MarkerRenderer;
 import com.github.standobyte.jojo.power.impl.stand.IStandPower;
 import com.github.standobyte.jojo.power.impl.stand.type.StandType;
+import com.github.standobyte.jojo.util.mc.MCUtil;
 import com.zeml.rotp_zkq.RotpKillerQueen;
 import com.zeml.rotp_zkq.init.InitStands;
+import com.zeml.rotp_zkq.ultil.GameplayHandler;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.ResourceLocation;
@@ -27,19 +30,7 @@ public class EntityBombMarker extends MarkerRenderer {
 
     @Override
     protected boolean shouldRender() {
-        AtomicBoolean render = new AtomicBoolean(false);
-
-        IStandPower.getStandPowerOptional(this.mc.player).ifPresent(power -> {
-            StandType<?> KQ = InitStands.KQ_STAND.getStandType();
-            if(power.getType() == KQ){
-                render.set(true);
-            }else {
-                render.set(false);
-            }
-        });
-
-
-        return render.get();
+        return GameplayHandler.userToBomb.containsKey(this.mc.player);
     }
 
     protected static class Marker extends MarkerRenderer.MarkerInstance {
@@ -50,22 +41,11 @@ public class EntityBombMarker extends MarkerRenderer {
 
     @Override
     protected void updatePositions(List<MarkerRenderer.MarkerInstance> list, float partialTick) {
-        IStandPower.getStandPowerOptional(this.mc.player).ifPresent((stand) ->{
-
-            Targets(this.mc.player).forEach((livingEntity -> {
-                list.add(new Marker(livingEntity.getPosition(partialTick).add(0,livingEntity.getBbHeight()*1.1,0),true));
-
-            }));
+        MCUtil.entitiesAround(Entity.class,this.mc.player,100,false,
+                livingEntity -> livingEntity.getUUID().equals(GameplayHandler.userToBomb.get(this.mc.player)))
+                .forEach(entity -> {
+                    list.add(new Marker(entity.getPosition(partialTick).add(0,entity.getBbHeight()*1.1,0),true));
         });
-    }
-
-
-    public static Stream<LivingEntity> Targets(@NotNull LivingEntity user){
-        World world = user.level;
-        String s_id = String.valueOf(user.getUUID());
-        Stream<LivingEntity> entidades = world.getEntitiesOfClass(LivingEntity.class,user.getBoundingBox().inflate(100),
-                EntityPredicates.ENTITY_STILL_ALIVE).stream().filter(entity -> entity.getTags().contains(s_id));
-        return entidades;
     }
 
 

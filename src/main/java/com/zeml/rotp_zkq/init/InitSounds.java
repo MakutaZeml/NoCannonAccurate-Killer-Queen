@@ -61,6 +61,12 @@ public class InitSounds {
             ()-> new SoundEvent(new ResourceLocation(RotpKillerQueen.MOD_ID,"sheer_heart_step")));
 
 
+    public static final RegistryObject<SoundEvent> KQ_BITES_ZA_DUST = SOUNDS.register("bites_za_dust",
+            ()-> new SoundEvent(new ResourceLocation(RotpKillerQueen.MOD_ID,"bites_za_dust")));
+
+    public static final RegistryObject<SoundEvent> USER_DUST = SOUNDS.register("user_bites_za_dust",
+            ()-> new SoundEvent(new ResourceLocation(RotpKillerQueen.MOD_ID,"user_bites_za_dust")));
+
     public
     static final OstSoundList KQ_OST = new OstSoundList(new ResourceLocation(RotpKillerQueen.MOD_ID, "kq_ost"), SOUNDS);
 

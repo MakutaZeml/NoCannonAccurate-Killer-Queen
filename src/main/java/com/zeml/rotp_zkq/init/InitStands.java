@@ -3,8 +3,10 @@ package com.zeml.rotp_zkq.init;
 import com.github.standobyte.jojo.entity.stand.StandPose;
 import com.zeml.rotp_zkq.RotpKillerQueen;
 import com.zeml.rotp_zkq.action.stand.*;
+import com.zeml.rotp_zkq.action.stand.BitesZaDust.*;
 import com.zeml.rotp_zkq.action.stand.punch.KQFinisher;
 import com.zeml.rotp_zkq.action.stand.punch.PunchBomb;
+import com.zeml.rotp_zkq.entity.stand.stands.BZDEntity;
 import com.zeml.rotp_zkq.entity.stand.stands.KQStandEntity;
 import com.github.standobyte.jojo.action.Action;
 import com.github.standobyte.jojo.action.stand.StandAction;
@@ -121,17 +123,36 @@ public class InitStands {
             ));
 
     public static final RegistryObject<StandAction> KQ_SNOW_BOMB = ACTIONS.register("kq_snow_bomb",
-            ()->new SnowBomb(new StandAction.Builder().staminaCost(100).resolveLevelToUnlock(4).cooldown(25).partsRequired(StandPart.ARMS)
+            ()->new SnowBomb(new StandAction.Builder().staminaCost(100).resolveLevelToUnlock(4).cooldown(100).partsRequired(StandPart.ARMS)
                     ));
 
     public static final RegistryObject<StandAction> KQ_BUBBLE_BOMB = ACTIONS.register("kq_bubble_bomb",
-            ()->new HBubbleBomb(new StandAction.Builder().staminaCost(100).cooldown(25).partsRequired(StandPart.ARMS)
+            ()->new HBubbleBomb(new StandAction.Builder().staminaCost(100).cooldown(100).partsRequired(StandPart.ARMS)
             ));
 
     public static final RegistryObject<StandEntityAction> KQ_SNOW_EXPLODE = ACTIONS.register("snow_explode",
             ()-> new ExplodeSnow(new StandEntityLightAttack.Builder().staminaCost(100).shiftVariationOf(KQ_SNOW_BOMB)
                     .standSound(InitSounds.KQ_BOMB).standPose(StandPose.RANGED_ATTACK).shiftVariationOf(KQ_BUBBLE_BOMB)
                     .standPerformDuration(20))) ;
+
+
+    //-------------------------------------Bites Za Dust Stuff-------------------------------------------------
+
+    public static final RegistryObject<StandAction> KQ_TIME_MARKER =ACTIONS.register("time_mark",
+            ()-> new TimeMarker(new StandAction.Builder().noResolveUnlock().staminaCost(50))
+            );
+
+    public static final RegistryObject<StandEntityAction> KQ_RESET = ACTIONS.register("kq_reset",()->
+            new ResetDay(new StandEntityAction.Builder().staminaCost(500)
+                    .holdToFire(60,false).standPose(EntityExplode.DETONATE).standRecoveryTicks(1)
+                    .cooldown(2000)));
+
+    public static final RegistryObject<StandAction> KQ_REMOVE_MARK =ACTIONS.register("remov_mark",
+            ()-> new RemoveTimeMarker(new StandAction.Builder().shiftVariationOf(KQ_RESET))
+    );
+
+    public static final RegistryObject<StandAction> PUT_VICTIM = ACTIONS.register("put_dust",
+            ()-> new SelectHayato(new StandAction.Builder()));
 
     public static final EntityStandRegistryObject<EntityStandType<StandStats>, StandEntityType<KQStandEntity>> KQ_STAND =
             new EntityStandRegistryObject<>("killer_queen",
@@ -150,7 +171,6 @@ public class InitStands {
                                     KQ_ITEM_BOMB.get(),
                                     KQ_BLOCK_BOMB.get(),
                                     KQ_SECOND_BOMB.get(),
-
                             },
 
 
@@ -172,4 +192,41 @@ public class InitStands {
                     .summonSound(InitSounds.KQ_SUMMON)
                     .unsummonSound(InitSounds.KQ_UNSUMMON))
             .withDefaultStandAttributes();
+
+
+    // ======================================== Bites Za Dust ========================================
+
+    public static final RegistryObject<StandAction> QUIT_VICTIM = ACTIONS.register("quit_dust",
+            ()-> new RemoveHayato(new StandAction.Builder()));
+
+    public static final EntityStandRegistryObject<EntityStandType<StandStats>, StandEntityType<BZDEntity>> STAMD_BITES_ZA_DUST =
+            new EntityStandRegistryObject<>("bites_za_dust",
+                    STANDS,
+                    () -> new EntityStandType.Builder<StandStats>()
+                            .color(0xda7baf)
+                            .storyPartName(ModStandsInit.PART_4_NAME)
+                            .leftClickHotbar(
+
+                            )
+                            .rightClickHotbar(
+                                    QUIT_VICTIM.get()
+                            )
+                            .defaultStats(StandStats.class, new StandStats.Builder()
+                                    .tier(6)
+                                    .power(13.0)
+                                    .speed(12.0)
+                                    .range(100.0)
+                                    .durability(16.0)
+                                    .precision(7.0)
+                                    .randomWeight(0)
+                            )
+                            .addOst(InitSounds.KQ_OST)
+                            .disableManualControl()
+                            .disableStandLeap()
+                            .build(),
+
+                    InitEntities.ENTITIES,
+                    () -> new StandEntityType<BZDEntity>(BZDEntity::new, 0.1F, 0.1F))
+                    .withDefaultStandAttributes();
+
 }

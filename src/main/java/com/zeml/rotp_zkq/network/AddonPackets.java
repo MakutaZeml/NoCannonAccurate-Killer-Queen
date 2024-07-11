@@ -3,8 +3,7 @@ package com.zeml.rotp_zkq.network;
 import java.util.Optional;
 
 import com.zeml.rotp_zkq.RotpKillerQueen;
-import com.zeml.rotp_zkq.network.server.AddTagPacket;
-import com.zeml.rotp_zkq.network.server.RemoveTagPacket;
+import com.zeml.rotp_zkq.network.server.*;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -33,6 +32,21 @@ public class AddonPackets {
                 Optional.of(NetworkDirection.PLAY_TO_CLIENT));
         channel.registerMessage(packetIndex++, RemoveTagPacket.class, 
                 RemoveTagPacket::encode, RemoveTagPacket::decode, RemoveTagPacket::handle, 
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        channel.registerMessage(packetIndex++, RemoveBombPacket.class,
+                RemoveBombPacket::encode, RemoveBombPacket::decode, RemoveBombPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        channel.registerMessage(packetIndex++, TimeMarkPacket.class,
+                TimeMarkPacket::encode, TimeMarkPacket::decode, TimeMarkPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        channel.registerMessage(packetIndex++, RemoveTimeMarkPacket.class,
+                RemoveTimeMarkPacket::encode, RemoveTimeMarkPacket::decode, RemoveTimeMarkPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        channel.registerMessage(packetIndex++, SelectHayatoPacket.class,
+                SelectHayatoPacket::encode, SelectHayatoPacket::decode, SelectHayatoPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        channel.registerMessage(packetIndex++, RemoveHayatoPacket.class,
+                RemoveHayatoPacket::encode, RemoveHayatoPacket::decode, RemoveHayatoPacket::handle,
                 Optional.of(NetworkDirection.PLAY_TO_CLIENT));
     }
     

@@ -4,10 +4,12 @@ import com.github.standobyte.jojo.entity.stand.StandEntity;
 import com.github.standobyte.jojo.entity.stand.StandEntityType;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
 public class KQStandEntity extends StandEntity {
@@ -35,6 +37,7 @@ public class KQStandEntity extends StandEntity {
         }
         super.tick();
     }
+
 
     protected void defineSynchedData() {
         super.defineSynchedData();
