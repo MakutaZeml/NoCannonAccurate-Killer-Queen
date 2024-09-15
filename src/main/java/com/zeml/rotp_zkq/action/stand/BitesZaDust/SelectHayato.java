@@ -1,5 +1,6 @@
 package com.zeml.rotp_zkq.action.stand.BitesZaDust;
 
+import com.github.standobyte.jojo.action.Action;
 import com.github.standobyte.jojo.action.ActionConditionResult;
 import com.github.standobyte.jojo.action.ActionTarget;
 import com.github.standobyte.jojo.action.stand.StandAction;
@@ -15,12 +16,22 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class SelectHayato extends StandAction {
     public SelectHayato(StandAction.Builder builder) {
         super(builder);
+    }
+
+    @Nullable
+    @Override
+    protected Action<IStandPower> replaceAction(IStandPower power, ActionTarget target) {
+        if(power.getUser() != null && BitesZaDustHandler.userToVictim.containsKey(power.getUser())){
+            return InitStands.QUIT_VICTIM.get();
+        }
+        return super.replaceAction(power, target);
     }
 
     @Override
@@ -49,12 +60,7 @@ public class SelectHayato extends StandAction {
         if(!world.isClientSide){
             BitesZaDustHandler.userToVictim.put(user,living);
             BitesZaDustHandler.victimToUser.put(living,user);
-            int resolve = power.getResolveLevel();
-            MCUtil.runCommand(user,"stand clear @s");
-            MCUtil.runCommand(user,"stand give @s rotp_zkq:bites_za_dust");
-            power.setResolveLevel(resolve);
             System.out.println(BitesZaDustHandler.victimToUser);
-            System.out.println(BitesZaDustHandler.userToTime);
         }
         if(user instanceof ServerPlayerEntity){
             AddonPackets.sendToClient(new SelectHayatoPacket(user.getId(),living.getId()),(ServerPlayerEntity) user);

@@ -14,6 +14,7 @@ import com.github.standobyte.jojo.power.impl.nonstand.type.hamon.HamonData;
 import com.github.standobyte.jojo.power.impl.stand.IStandPower;
 import com.zeml.rotp_zkq.entity.damaging.projectile.SnowBombEntity;
 import com.zeml.rotp_zkq.init.InitStands;
+import com.zeml.rotp_zkq.ultil.BitesZaDustHandler;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -32,6 +33,7 @@ public class SnowBomb extends StandAction {
     public SnowBomb(StandAction.Builder builder) {
         super(builder);
     }
+
 
 
     @Override
@@ -60,7 +62,7 @@ public class SnowBomb extends StandAction {
             PlayerEntity player = (PlayerEntity) user;
             ItemStack stack = GetSnowItemsP(player, false);
             Item type = stack.getItem();
-            if (type == Items.SNOWBALL){
+            if (type == Items.SNOWBALL && !BitesZaDustHandler.userToVictim.containsKey(user)){
                 return ActionConditionResult.POSITIVE;
             }else {
                 return ActionConditionResult.NEGATIVE;
@@ -69,7 +71,7 @@ public class SnowBomb extends StandAction {
         }else {
             ItemStack stack = GetSnowItem(user);
             Item type = stack.getItem();
-            if (type == Items.SNOWBALL){
+            if (type == Items.SNOWBALL && !BitesZaDustHandler.userToVictim.containsKey(user)){
                 return ActionConditionResult.POSITIVE;
             }else {
                 return ActionConditionResult.NEGATIVE;

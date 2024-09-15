@@ -12,6 +12,5 @@ public class AddonStands {
     public static final EntityStandSupplier<EntityStandType<StandStats>, StandEntityType<KQStandEntity>>
     KQ_STAND = new EntityStandSupplier<>(InitStands.KQ_STAND);
 
-    public static final EntityStandSupplier<EntityStandType<StandStats>, StandEntityType<BZDEntity>>
-            BZD_STAND = new EntityStandSupplier<>(InitStands.STAMD_BITES_ZA_DUST);
+
 }

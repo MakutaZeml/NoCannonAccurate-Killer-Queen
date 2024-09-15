@@ -33,9 +33,9 @@ public class KillerQueenModel extends HumanoidStandModel<KQStandEntity> {
 		texHeight = 128;
 
 		head.texOffs(17, 28).addBox(-4.0F, -9.0F, -1.5F, 1.0F, 1.0F, 3.0F, 0.0F, true);
-		head.texOffs(24, 33).addBox(-3.925F, -10.0F, -0.575F, 1.0F, 2.0F, 2.0F, 0.0F, true);
+		head.texOffs(24, 33).addBox(-3.925F, -11.0F, -0.575F, 1.0F, 2.0F, 2.0F, 0.0F, true);
 		head.texOffs(17, 28).addBox(3.0F, -9.0F, -1.5F, 1.0F, 1.0F, 3.0F, 0.0F, false);
-		head.texOffs(24, 33).addBox(3.025F, -10.0F, -0.575F, 1.0F, 2.0F, 2.0F, 0.0F, false);
+		head.texOffs(24, 33).addBox(3.025F, -11.0F, -0.575F, 1.0F, 2.0F, 2.0F, 0.0F, false);
 
 		torso.texOffs(25, 24).addBox(-4.0F, 5.7F, -1.5F, 8.0F, 6.0F, 3.0F, 0.4F, false);
 		torso.texOffs(0, 16).addBox(-4.5F, -0.5F, -2.5F, 9.0F, 6.0F, 5.0F, 0.0F, false);
@@ -65,22 +65,22 @@ public class KillerQueenModel extends HumanoidStandModel<KQStandEntity> {
 		leftArm.texOffs(44, 15).addBox(-1.5F, -2.7F, -2.0F, 4.0F, 5.0F, 4.0F, 0.1F, false);
 		leftArm.texOffs(0, 0).addBox(2.5F, -1.95F, -1.55F, 1.0F, 3.0F, 3.0F, 0.0F, false);
 
-		leftForeArm.texOffs(52, 37).addBox(-2.5F, 0.0F, -2.25F, 4.0F, 1.0F, 4.0F, 0.3F, false);
-		leftForeArm.texOffs(33, 46).addBox(-1.1F, -0.25F, 1.5F, 2.0F, 2.25F, 1.0F, 0.0F, false);
+		leftForeArm.texOffs(52, 37).addBox(-2F, 0.0F, -2.25F, 4.0F, 1.0F, 4.0F, 0.3F, false);
+		leftForeArm.texOffs(33, 46).addBox(-1F, -0.25F, 1.5F, 2.0F, 2F, 1.0F, 0.0F, false);
 
 		rightArm.texOffs(44, 15).addBox(-2.5F, -2.7F, -2.0F, 4.0F, 5.0F, 4.0F, 0.1F, true);
 		rightArm.texOffs(0, 0).addBox(-3.5F, -1.95F, -1.55F, 1.0F, 3.0F, 3.0F, 0.0F, true);
 
-		rightForeArm.texOffs(52, 37).addBox(-1.5F, 0.0F, -2.25F, 4.0F, 1.0F, 4.0F, 0.3F, true);
-		rightForeArm.texOffs(29, 0).addBox(-0.9F, -0.25F, 1.5F, 2.0F, 2.25F, 1.0F, 0.0F, false);
+		rightForeArm.texOffs(52, 37).addBox(-2F, 0.0F, -2.25F, 4.0F, 1.0F, 4.0F, 0.3F, true);
+		rightForeArm.texOffs(29, 0).addBox(-1F, -0.25F, 1.5F, 2.0F, 2F, 1.0F, 0.0F, false);
 
 		leftLeg.texOffs(44, 49).addBox(-1.8F, 4.75F, -2.0F, 4.0F, 1.0F, 4.0F, 0.3F, false);
-		leftLeg.texOffs(34, 43).addBox(-1.0F, 4.0F, -2.5F, 2.0F, 2.25F, 1.0F, 0.0F, false);
+		leftLeg.texOffs(34, 43).addBox(-1.0F, 4.0F, -2.5F, 2.0F, 2F, 1.0F, 0.0F, false);
 
 		leftLowerLeg.texOffs(43, 29).addBox(-1.75F, 2.25F, -2.25F, 4.0F, 4.0F, 4.0F, 0.3F, false);
 
 		rightLeg.texOffs(44, 49).addBox(-2.0F, 4.75F, -2.0F, 4.0F, 1.0F, 4.0F, 0.3F, true);
-		rightLeg.texOffs(34, 43).addBox(-1.0F, 4.0F, -2.5F, 2.0F, 2.25F, 1.0F, 0.0F, true);
+		rightLeg.texOffs(34, 43).addBox(-1.0F, 4.0F, -2.5F, 2.0F, 2.F, 1.0F, 0.0F, true);
 
 		rightLowerLeg.texOffs(43, 29).addBox(-2.0F, 2.25F, -2.25F, 4.0F, 4.0F, 4.0F, 0.3F, true);
 	}

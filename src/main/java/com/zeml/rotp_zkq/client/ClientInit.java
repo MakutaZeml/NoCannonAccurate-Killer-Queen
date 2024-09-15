@@ -6,7 +6,6 @@ import com.zeml.rotp_zkq.RotpKillerQueen;
 import com.zeml.rotp_zkq.client.render.entity.renderer.auxiliarstand.SheerHeartRenderer;
 import com.zeml.rotp_zkq.client.render.entity.renderer.damaging.projectile.BubbleBombRenderer;
 import com.zeml.rotp_zkq.client.render.entity.renderer.damaging.projectile.SnowBombRenderer;
-import com.zeml.rotp_zkq.client.render.entity.renderer.stand.BitesZaDustRenderer;
 import com.zeml.rotp_zkq.client.render.entity.renderer.stand.KillerQueenRenderer;
 import com.zeml.rotp_zkq.client.ui.marker.BitesZaDustMaker;
 import com.zeml.rotp_zkq.client.ui.marker.BlockBombMarker;
@@ -34,7 +33,6 @@ public class ClientInit {
         Minecraft mc = event.getMinecraftSupplier().get();
 
         RenderingRegistry.registerEntityRenderingHandler(AddonStands.KQ_STAND.getEntityType(), KillerQueenRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(AddonStands.BZD_STAND.getEntityType(), BitesZaDustRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SNOW_BOMB.get(), SnowBombRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BUBBLE_BOMB.get(), BubbleBombRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SHEAR_HEART.get(), SheerHeartRenderer::new);

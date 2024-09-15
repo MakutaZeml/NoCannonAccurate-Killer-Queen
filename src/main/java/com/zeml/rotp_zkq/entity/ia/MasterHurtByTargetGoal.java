@@ -44,4 +44,5 @@ public class MasterHurtByTargetGoal extends TargetGoal {
 
         super.start();
     }
+
 }

@@ -6,7 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 
-public class RemoveTagPacket {
+public class    RemoveTagPacket {
     private final int entityId;
     private final String tag;
 

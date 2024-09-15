@@ -1,5 +1,6 @@
 package com.zeml.rotp_zkq.action.stand;
 
+import com.github.standobyte.jojo.action.ActionConditionResult;
 import com.github.standobyte.jojo.action.ActionTarget;
 import com.github.standobyte.jojo.action.stand.StandAction;
 import com.github.standobyte.jojo.action.stand.StandEntityAction;
@@ -8,6 +9,7 @@ import com.github.standobyte.jojo.entity.stand.StandEntityTask;
 import com.github.standobyte.jojo.power.impl.stand.IStandPower;
 import com.zeml.rotp_zkq.entity.damaging.projectile.BubbleBombEntity;
 import com.zeml.rotp_zkq.entity.damaging.projectile.SnowBombEntity;
+import com.zeml.rotp_zkq.ultil.BitesZaDustHandler;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -21,7 +23,13 @@ public class HBubbleBomb extends StandAction {
         super(builder);
     }
 
-
+    @Override
+    public ActionConditionResult checkConditions(LivingEntity user, IStandPower power, ActionTarget target) {
+        if(!BitesZaDustHandler.userToVictim.containsKey(user)){
+            return ActionConditionResult.POSITIVE;
+        }
+        return ActionConditionResult.NEGATIVE;
+    }
 
     @Override
     protected void perform(World world, LivingEntity user, IStandPower power, ActionTarget target) {

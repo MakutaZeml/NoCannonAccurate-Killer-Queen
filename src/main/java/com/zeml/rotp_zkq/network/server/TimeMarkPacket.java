@@ -33,7 +33,7 @@ public class TimeMarkPacket {
         ctx.get().enqueueWork(() -> {
             Entity entity = com.github.standobyte.jojo.client.ClientUtil.getEntityById(msg.userID);
             if (entity instanceof LivingEntity) {
-                BitesZaDustHandler.userToTime.put(entity.getName().getString(), msg.time);
+
             }
         });
         ctx.get().setPacketHandled(true);

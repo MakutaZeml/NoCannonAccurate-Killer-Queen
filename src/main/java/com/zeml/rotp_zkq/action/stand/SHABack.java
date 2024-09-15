@@ -8,6 +8,7 @@ import com.github.standobyte.jojo.entity.stand.StandEntityTask;
 import com.github.standobyte.jojo.power.impl.stand.IStandPower;
 import com.zeml.rotp_zkq.entity.stand.SheerHeart;
 import com.zeml.rotp_zkq.init.InitSounds;
+import com.zeml.rotp_zkq.ultil.BitesZaDustHandler;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
@@ -17,6 +18,14 @@ import java.util.List;
 public class SHABack extends StandEntityAction {
     public SHABack(StandEntityAction.Builder builder) {
         super(builder);
+    }
+
+    @Override
+    public ActionConditionResult checkConditions(LivingEntity user, IStandPower power, ActionTarget target) {
+        if(!BitesZaDustHandler.userToVictim.containsKey(user)){
+            return ActionConditionResult.POSITIVE;
+        }
+        return ActionConditionResult.NEGATIVE;
     }
 
 

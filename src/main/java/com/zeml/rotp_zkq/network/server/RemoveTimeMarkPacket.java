@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 public class RemoveTimeMarkPacket {
     private final int userID;
 
-    public RemoveTimeMarkPacket(int userID, long time){
+    public RemoveTimeMarkPacket(int userID){
         this.userID = userID;
     }
 
@@ -22,8 +22,7 @@ public class RemoveTimeMarkPacket {
 
     public static RemoveTimeMarkPacket decode(PacketBuffer buf) {
         int entityId = buf.readInt();
-        long time = buf.readLong();
-        return new RemoveTimeMarkPacket(entityId, time);
+        return new RemoveTimeMarkPacket(entityId);
     }
 
     public static void handle(RemoveTimeMarkPacket msg, Supplier<NetworkEvent.Context> ctx) {

@@ -1,8 +1,10 @@
 package com.zeml.rotp_zkq;
 
+import com.zeml.rotp_zkq.capability.entity.CapabilityHandler;
 import com.zeml.rotp_zkq.init.*;
 import com.zeml.rotp_zkq.network.AddonPackets;
 
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,10 +29,14 @@ public class RotpKillerQueen {
         ModEntityTypes.ENTITIES.register(modEventBus);
         
         AddonPackets.init();
+
+        modEventBus.addListener(this::preInit);
     }
 
 
-
+    private void preInit(FMLCommonSetupEvent event){
+        CapabilityHandler.commonSetupRegister();
+    }
     public static Logger getLogger() {
         return LOGGER;
     }

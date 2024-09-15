@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import com.github.standobyte.jojo.action.ActionConditionResult;
 import com.github.standobyte.jojo.action.ActionTarget;
+import com.zeml.rotp_zkq.ultil.BitesZaDustHandler;
 import org.jetbrains.annotations.NotNull;
 
 import com.github.standobyte.jojo.action.stand.StandEntityAction;
@@ -33,7 +34,7 @@ public class SheerHeartAttack extends StandEntityAction {
                 able=false;
             }
         }
-        if(able){
+        if(able && !BitesZaDustHandler.userToVictim.containsKey(user)){
             return ActionConditionResult.POSITIVE;
         }else {
             return  ActionConditionResult.NEGATIVE;

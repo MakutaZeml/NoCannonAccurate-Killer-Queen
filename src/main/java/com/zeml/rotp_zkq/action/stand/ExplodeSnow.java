@@ -11,6 +11,7 @@ import com.github.standobyte.jojo.power.impl.stand.IStandPower;
 import com.zeml.rotp_zkq.entity.damaging.projectile.BubbleBombEntity;
 import com.zeml.rotp_zkq.entity.damaging.projectile.SnowBombEntity;
 import com.zeml.rotp_zkq.entity.stand.SheerHeart;
+import com.zeml.rotp_zkq.ultil.BitesZaDustHandler;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.world.Explosion;
@@ -25,6 +26,13 @@ public class ExplodeSnow extends StandEntityLightAttack {
         super(builder);
     }
 
+    @Override
+    public ActionConditionResult checkConditions(LivingEntity user, IStandPower power, ActionTarget target) {
+        if(!BitesZaDustHandler.userToVictim.containsKey(user)){
+            return ActionConditionResult.POSITIVE;
+        }
+        return ActionConditionResult.NEGATIVE;
+    }
 
     @Override
     public void standPerform(@NotNull World world, StandEntity standEntity, IStandPower userPower, StandEntityTask task){

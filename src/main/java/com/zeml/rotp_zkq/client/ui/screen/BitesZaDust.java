@@ -22,7 +22,7 @@ public class BitesZaDust {
         MatrixStack matrixStack = event.getMatrixStack();
         if(event.getType() == RenderGameOverlayEvent.ElementType.HELMET){
             Minecraft mc = Minecraft.getInstance();
-            if(mc.player != null && BitesZaDustHandler.timer.containsKey(mc.player)){
+            if(BitesZaDustHandler.timer.containsKey(mc.player)){
                 int screenWidth = event.getWindow().getGuiScaledWidth();
                 mc.getTextureManager().bind(BITES_ZA_DUST_1);
                 int textureWidth = 256;

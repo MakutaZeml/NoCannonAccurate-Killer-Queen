@@ -48,6 +48,21 @@ public class AddonPackets {
         channel.registerMessage(packetIndex++, RemoveHayatoPacket.class,
                 RemoveHayatoPacket::encode, RemoveHayatoPacket::decode, RemoveHayatoPacket::handle,
                 Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        channel.registerMessage(packetIndex++,TimerPacket.class,
+                TimerPacket::encode,TimerPacket::decode,TimerPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        channel.registerMessage(packetIndex++,RemoveTimerPacket.class,
+                RemoveTimerPacket::encode,RemoveTimerPacket::decode,RemoveTimerPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        channel.registerMessage(packetIndex++,PutTimerPacket.class,
+                PutTimerPacket::encode,PutTimerPacket::decode,PutTimerPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        channel.registerMessage(packetIndex++,SetCapabilityBomb.class,
+                SetCapabilityBomb::encode,SetCapabilityBomb::decode,SetCapabilityBomb::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        channel.registerMessage(packetIndex++,SetBoolTimeMarkerPacket.class,
+                SetBoolTimeMarkerPacket::encode,SetBoolTimeMarkerPacket::decode,SetBoolTimeMarkerPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
     }
     
     public static void sendToClient(Object msg, ServerPlayerEntity player) {

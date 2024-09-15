@@ -3,6 +3,13 @@ package com.zeml.rotp_zkq.action.stand;
 import com.github.standobyte.jojo.action.ActionConditionResult;
 import com.github.standobyte.jojo.action.ActionTarget;
 import com.github.standobyte.jojo.action.stand.StandEntityLightAttack;
+import com.github.standobyte.jojo.action.stand.punch.StandBlockPunch;
+import com.github.standobyte.jojo.action.stand.punch.StandEntityPunch;
+import com.github.standobyte.jojo.util.mc.damage.StandEntityDamageSource;
+import com.zeml.rotp_zkq.ultil.BitesZaDustHandler;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
 import com.github.standobyte.jojo.action.stand.StandEntityAction;
@@ -21,6 +28,14 @@ public class ItemFBomb extends StandEntityLightAttack {
     }
 
     @Override
+    public ActionConditionResult checkConditions(LivingEntity user, IStandPower power, ActionTarget target) {
+        if(user.getItemInHand(Hand.MAIN_HAND) == ItemStack.EMPTY && user.getItemInHand(Hand.OFF_HAND) != ItemStack.EMPTY){
+            return ActionConditionResult.POSITIVE;
+        }
+        return ActionConditionResult.NEGATIVE;
+    }
+
+    @Override
     public void standPerform(@NotNull World world, StandEntity standEntity, IStandPower userPower, StandEntityTask task) {
         if (!world.isClientSide) {
             LivingEntity user = userPower.getUser();
@@ -33,11 +48,20 @@ public class ItemFBomb extends StandEntityLightAttack {
                 stack.getOrCreateTag().putInt("user",userid);
                 user.setItemInHand(Hand.MAIN_HAND, stack);
                 user.setItemInHand(Hand.OFF_HAND, itembomb);
+                return;
             }
         }
     }
 
+    @Override
+    public StandBlockPunch punchBlock(StandEntity stand, BlockPos pos, BlockState state) {
+        return null;
+    }
 
+    @Override
+    public StandEntityPunch punchEntity(StandEntity stand, Entity target, StandEntityDamageSource dmgSource) {
+        return super.punchEntity(stand, target, dmgSource).damage(0);
+    }
 
     private @NotNull ItemStack itembomb(@NotNull LivingEntity entity){
         return entity.getOffhandItem();

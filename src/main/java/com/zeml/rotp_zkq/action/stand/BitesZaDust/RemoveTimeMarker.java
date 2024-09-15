@@ -7,16 +7,20 @@ import com.github.standobyte.jojo.action.stand.StandEntityAction;
 import com.github.standobyte.jojo.entity.stand.StandEntity;
 import com.github.standobyte.jojo.entity.stand.StandEntityTask;
 import com.github.standobyte.jojo.power.impl.stand.IStandPower;
+import com.zeml.rotp_zkq.capability.entity.LivingData;
+import com.zeml.rotp_zkq.capability.entity.LivingDataProvider;
 import com.zeml.rotp_zkq.init.InitSounds;
 import com.zeml.rotp_zkq.init.InitStands;
 import com.zeml.rotp_zkq.network.AddonPackets;
 import com.zeml.rotp_zkq.network.server.RemoveBombPacket;
+import com.zeml.rotp_zkq.network.server.RemoveTimeMarkPacket;
 import com.zeml.rotp_zkq.ultil.BitesZaDustHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.Nullable;
 
 public class RemoveTimeMarker extends StandAction {
@@ -36,12 +40,12 @@ public class RemoveTimeMarker extends StandAction {
     @Override
     protected void perform(World world, LivingEntity user, IStandPower power, ActionTarget target) {
         if(!world.isClientSide){
-            BitesZaDustHandler.userToTime.remove(user.getName().getString());
+            LazyOptional<LivingData> livingDataOptional = user.getCapability(LivingDataProvider.CAPABILITY);
+            livingDataOptional.ifPresent(livingData -> {
+                livingData.setHasTimeMark(false);
+            });
         }
-        if(user instanceof ServerPlayerEntity){
-            AddonPackets.sendToClient(new RemoveBombPacket(user.getId()),(ServerPlayerEntity) user);
 
-        }
     }
 
     @Override

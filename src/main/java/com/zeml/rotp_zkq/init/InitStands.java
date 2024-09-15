@@ -4,8 +4,7 @@ import com.github.standobyte.jojo.entity.stand.StandPose;
 import com.zeml.rotp_zkq.RotpKillerQueen;
 import com.zeml.rotp_zkq.action.stand.*;
 import com.zeml.rotp_zkq.action.stand.BitesZaDust.*;
-import com.zeml.rotp_zkq.action.stand.punch.KQFinisher;
-import com.zeml.rotp_zkq.action.stand.punch.PunchBomb;
+import com.zeml.rotp_zkq.action.stand.punch.*;
 import com.zeml.rotp_zkq.entity.stand.stands.BZDEntity;
 import com.zeml.rotp_zkq.entity.stand.stands.KQStandEntity;
 import com.github.standobyte.jojo.action.Action;
@@ -38,12 +37,12 @@ public class InitStands {
  // ======================================== Killer Queen ========================================
 
     public static final RegistryObject<StandEntityAction> KQ_PUNCH = ACTIONS.register("kq_punch", 
-            () -> new StandEntityLightAttack(new StandEntityLightAttack.Builder()
+            () -> new KQNormalPunch(new StandEntityLightAttack.Builder()
                     .punchSound(InitSounds.KQ_PUNCH_LIGHT)
                     .standSound(Phase.WINDUP, InitSounds.KQ_ORA)));
     
     public static final RegistryObject<StandEntityAction> KQ_BARRAGE = ACTIONS.register("kq_barrage", 
-            () -> new StandEntityMeleeBarrage(new StandEntityMeleeBarrage.Builder()
+            () -> new KQBarrage(new StandEntityMeleeBarrage.Builder()
                     .barrageHitSound(InitSounds.KQ_PUNCH_LIGHT)
                     .standSound(InitSounds.KQ_ORA_ORA_ORA)));
     
@@ -54,7 +53,7 @@ public class InitStands {
                     .partsRequired(StandPart.ARMS)));
     
     public static final RegistryObject<StandEntityHeavyAttack> KQ_HEAVY_PUNCH = ACTIONS.register("kq_heavy_punch", 
-            () -> new StandEntityHeavyAttack(new StandEntityHeavyAttack.Builder()
+            () -> new KQHeavyPunch(new StandEntityHeavyAttack.Builder()
                     .punchSound(InitSounds.KQ_PUNCH_HEAVY)
                     .standSound(Phase.WINDUP, InitSounds.KQ_ORA_LONG)
                     .partsRequired(StandPart.ARMS)
@@ -62,10 +61,11 @@ public class InitStands {
                     .shiftVariationOf(KQ_PUNCH).shiftVariationOf(KQ_BARRAGE)));
     
     public static final RegistryObject<StandEntityAction> KQ_BLOCK = ACTIONS.register("kq_block", 
-            () -> new StandEntityBlock());
+            () -> new KQBlock());
 
     public static final RegistryObject<StandEntityAction> KQ_ITEM_BOMB = ACTIONS.register("kq_itembomb",
-            ()->new ItemFBomb(new StandEntityLightAttack.Builder()
+            ()->new ItemFBomb(new StandEntityLightAttack.Builder().punchSound(InitSounds.VOID).swingSound(InitSounds.VOID)
+                    .standPose(EntityExplode.DETONATE).standOffsetFromUser(0,0,0)
                     .needsFreeMainHand().resolveLevelToUnlock(1)
                     .partsRequired(StandPart.ARMS).cooldown(5)));
 
@@ -199,34 +199,5 @@ public class InitStands {
     public static final RegistryObject<StandAction> QUIT_VICTIM = ACTIONS.register("quit_dust",
             ()-> new RemoveHayato(new StandAction.Builder()));
 
-    public static final EntityStandRegistryObject<EntityStandType<StandStats>, StandEntityType<BZDEntity>> STAMD_BITES_ZA_DUST =
-            new EntityStandRegistryObject<>("bites_za_dust",
-                    STANDS,
-                    () -> new EntityStandType.Builder<StandStats>()
-                            .color(0xda7baf)
-                            .storyPartName(ModStandsInit.PART_4_NAME)
-                            .leftClickHotbar(
-
-                            )
-                            .rightClickHotbar(
-                                    QUIT_VICTIM.get()
-                            )
-                            .defaultStats(StandStats.class, new StandStats.Builder()
-                                    .tier(6)
-                                    .power(13.0)
-                                    .speed(12.0)
-                                    .range(100.0)
-                                    .durability(16.0)
-                                    .precision(7.0)
-                                    .randomWeight(0)
-                            )
-                            .addOst(InitSounds.KQ_OST)
-                            .disableManualControl()
-                            .disableStandLeap()
-                            .build(),
-
-                    InitEntities.ENTITIES,
-                    () -> new StandEntityType<BZDEntity>(BZDEntity::new, 0.1F, 0.1F))
-                    .withDefaultStandAttributes();
 
 }
