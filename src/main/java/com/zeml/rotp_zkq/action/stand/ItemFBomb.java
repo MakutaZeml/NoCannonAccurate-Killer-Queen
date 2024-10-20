@@ -27,13 +27,6 @@ public class ItemFBomb extends StandEntityLightAttack {
         super(builder);
     }
 
-    @Override
-    public ActionConditionResult checkConditions(LivingEntity user, IStandPower power, ActionTarget target) {
-        if(user.getItemInHand(Hand.MAIN_HAND) == ItemStack.EMPTY && user.getItemInHand(Hand.OFF_HAND) != ItemStack.EMPTY){
-            return ActionConditionResult.POSITIVE;
-        }
-        return ActionConditionResult.NEGATIVE;
-    }
 
     @Override
     public void standPerform(@NotNull World world, StandEntity standEntity, IStandPower userPower, StandEntityTask task) {

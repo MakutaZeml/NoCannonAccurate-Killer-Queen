@@ -176,8 +176,8 @@ public class InitStands {
 
                             StandStats.class, new StandStats.Builder()
                             .tier(6)
-                            .power(14.0)
-                            .speed(12.0)
+                            .power(15.0)
+                            .speed(14.0)
                             .range(3.0, 8.0)
                             .durability(12.0)
                             .precision(12.0)

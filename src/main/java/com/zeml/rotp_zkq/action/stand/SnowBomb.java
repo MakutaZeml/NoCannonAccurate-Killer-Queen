@@ -7,8 +7,10 @@ import com.github.standobyte.jojo.action.stand.StandAction;
 import com.github.standobyte.jojo.action.stand.StandEntityAction;
 import com.github.standobyte.jojo.entity.stand.StandEntity;
 import com.github.standobyte.jojo.entity.stand.StandEntityTask;
+import com.github.standobyte.jojo.init.ModItems;
 import com.github.standobyte.jojo.init.power.non_stand.ModPowers;
 import com.github.standobyte.jojo.init.power.non_stand.hamon.ModHamonSkills;
+import com.github.standobyte.jojo.item.TommyGunItem;
 import com.github.standobyte.jojo.power.impl.nonstand.INonStandPower;
 import com.github.standobyte.jojo.power.impl.nonstand.type.hamon.HamonData;
 import com.github.standobyte.jojo.power.impl.stand.IStandPower;
@@ -28,6 +30,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static com.github.standobyte.jojo.action.non_stand.HamonBubbleLauncher.getSoapItem;
+
 public class SnowBomb extends StandAction {
     INonStandPower pow;
     public SnowBomb(StandAction.Builder builder) {
@@ -38,21 +42,7 @@ public class SnowBomb extends StandAction {
 
     @Override
     protected Action<IStandPower> replaceAction(IStandPower power, ActionTarget target) {
-        AtomicBoolean change = new AtomicBoolean(false);
-        INonStandPower.getNonStandPowerOptional(power.getUser()).ifPresent(ipower->{
-            Optional<HamonData> hamonOp = ipower.getTypeSpecificData(ModPowers.HAMON.get());
-            if(hamonOp.isPresent()){
-                HamonData hamon = hamonOp.get();
-                if(hamon.isSkillLearned(ModHamonSkills.BUBBLE_LAUNCHER.get())){
-                    change.set(true);
-                }
-            }
-        }
-        );
-        if(change.get()){
-            return InitStands.KQ_BUBBLE_BOMB.get();
-        }
-        return super.replaceAction(power, target);
+        return checkSoap(power.getUser()) ? InitStands.KQ_BUBBLE_BOMB.get(): super.replaceAction(power, target);
     }
 
 
@@ -137,6 +127,15 @@ public class SnowBomb extends StandAction {
     @Override
     public StandAction[] getExtraUnlockable() {
         return new StandAction[] { InitStands.KQ_BUBBLE_BOMB.get()};
+    }
+
+
+    public static boolean checkSoap(LivingEntity entity) {
+        ItemStack item = getSoapItem(entity);
+        if (item.isEmpty()) {
+            return false;
+        }
+        return item.getItem() != ModItems.BUBBLE_GLOVES.get() || TommyGunItem.getAmmo(item) > 0;
     }
 
 }
