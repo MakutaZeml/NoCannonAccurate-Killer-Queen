@@ -39,8 +39,7 @@ public class KQFinisher extends StandEntityHeavyAttack {
                 });
             }
         }
-        return super.punchEntity(stand, target,dmgSource).addKnockback(0.5F + stand.getLastHeavyFinisherValue())
-                .knockbackXRot(-60F);
+        return super.punchEntity(stand, target,dmgSource).addKnockback(0.5F + stand.getLastHeavyFinisherValue());
     }
 
 

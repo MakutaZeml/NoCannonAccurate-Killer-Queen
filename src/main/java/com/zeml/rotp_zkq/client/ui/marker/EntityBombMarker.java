@@ -33,13 +33,6 @@ public class EntityBombMarker extends MarkerRenderer {
         super(new ResourceLocation(RotpKillerQueen.MOD_ID,"textures/action/kq_entitybomb.png"), mc);
     }
 
-    /*
-    @Override
-    protected boolean shouldRender() {
-        return GameplayHandler.userToBomb.containsKey(this.mc.player);
-    }
-
-     */
 
     protected static class Marker extends MarkerRenderer.MarkerInstance {
         public Marker(Vector3d pos, boolean outlined) {
