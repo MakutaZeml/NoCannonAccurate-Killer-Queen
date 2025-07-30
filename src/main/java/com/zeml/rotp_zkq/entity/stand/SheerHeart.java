@@ -32,6 +32,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraftforge.event.ForgeEventFactory;
+
 import org.jetbrains.annotations.NotNull;
 
 
@@ -275,7 +277,7 @@ public class SheerHeart extends MonsterEntity {
 
     private void explodeCreeper() {
         if (!this.level.isClientSide) {
-            Explosion.Mode explosion$mode = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE;
+            Explosion.Mode explosion$mode = JojoModUtil.breakingBlocksEnabled(this.level) && ForgeEventFactory.getMobGriefingEvent(this.level, this) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE;
             float f = this.isPowered() ? 2.0F : 1.0F;
             this.dead = true;
 
