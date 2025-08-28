@@ -2,6 +2,7 @@ package com.zeml.rotp_zkq.action.stand;
 
 import com.github.standobyte.jojo.action.ActionConditionResult;
 import com.github.standobyte.jojo.action.ActionTarget;
+import com.github.standobyte.jojo.action.config.ActionConfigField;
 import com.github.standobyte.jojo.action.stand.StandEntityHeavyAttack;
 import com.github.standobyte.jojo.action.stand.StandEntityLightAttack;
 import com.github.standobyte.jojo.entity.stand.StandPose;
@@ -36,8 +37,8 @@ import java.util.UUID;
 
 
 public class EntityExplode extends StandEntityLightAttack {
+    @ActionConfigField private final float multiplier = 1;
     public static final StandPose DETONATE = new StandPose("DETONATE");
-
 
     public EntityExplode(StandEntityLightAttack.Builder builder) {
         super(builder);
@@ -60,7 +61,7 @@ public class EntityExplode extends StandEntityLightAttack {
                 double range = 3*standEntity.getMaxRange();
                 Entity entity = PunchBomb.entityInRange(userPower,getTarget(userPower),16);
                 if(entity!= null){
-                    float ex_range = (float) (Math.sqrt(14*entity.getBbHeight()*entity.getBbWidth()*entity.getBbWidth()));
+                    float ex_range = (float) (multiplier* (Math.sqrt(14*entity.getBbHeight()*entity.getBbWidth()*entity.getBbWidth())));
                     entity.level.explode(user,entity.getX(),entity.getY(),entity.getZ(),ex_range, Explosion.Mode.NONE);
 
                     LazyOptional<LivingData> livingDataOptional = user.getCapability(LivingDataProvider.CAPABILITY);
